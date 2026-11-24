@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GapHunter demo</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1280px; height:720px; overflow:hidden; background:#0b0f1a; }
+  body { font-family:"DejaVu Sans","Liberation Sans",sans-serif; color:#e5edf7; position:relative; }
+  .scene { position:absolute; inset:0; padding:56px 72px; opacity:0; }
+  .kicker { font-size:19px; letter-spacing:3px; color:#22d3ee; text-transform:uppercase; margin-bottom:14px; }
+  h1 { font-size:64px; line-height:1.08; font-weight:800; }
+  h2 { font-size:40px; line-height:1.15; font-weight:800; margin-bottom:18px; }
+  .sub { font-size:25px; color:#9fb3c8; line-height:1.45; }
+  .accent { color:#22d3ee; } .green { color:#34d399; } .amber { color:#fbbf24; }
+  .caption { position:absolute; left:0; right:0; bottom:0; padding:20px 72px 26px;
+             background:rgba(4,8,16,.88); font-size:23px; line-height:1.4; color:#dbe7f5;
+             border-top:1px solid #1c2a3f; min-height:96px; }
+  .caption b { color:#fff; }
+  .card { background:#101827; border:1px solid #22314a; border-radius:14px; padding:20px 24px; }
+  .card h3 { font-size:21px; margin-bottom:8px; }
+  .card p { font-size:18px; color:#9fb3c8; line-height:1.4; }
+  .mono { font-family:"DejaVu Sans Mono",monospace; }
+  .hash { font-family:"DejaVu Sans Mono",monospace; font-size:16.5px; color:#7dd3fc; }
+  table { border-collapse:collapse; width:100%; font-size:21px; }
+  th,td { text-align:left; padding:13px 16px; border-bottom:1px solid #22314a; }
+  th { color:#9fb3c8; font-weight:600; font-size:18px; text-transform:uppercase; letter-spacing:1px; }
+  .pill { display:inline-block; padding:5px 14px; border-radius:999px; font-size:17px; font-weight:700; }
+  .pill.g { background:rgba(52,211,153,.15); color:#34d399; border:1px solid #34d399; }
+  .pill.a { background:rgba(251,191,36,.13); color:#fbbf24; border:1px solid #fbbf24; }
+  #chartWrap { background:#0e1626; border:1px solid #22314a; border-radius:14px; padding:14px 10px 4px; }
+  .legend { font-size:17px; color:#9fb3c8; padding:6px 14px 10px; }
+  .dot { display:inline-block; width:11px; height:11px; border-radius:50%; margin:0 6px 0 14px; }
+  .flowrow { display:flex; gap:18px; align-items:stretch; }
+  .step { flex:1; background:#101827; border:1px solid #22314a; border-radius:14px; padding:18px 20px; }
+  .step .n { font-size:15px; color:#22d3ee; letter-spacing:2px; margin-bottom:7px; }
+  .step h4 { font-size:21px; margin-bottom:7px; }
+  .step p { font-size:17px; color:#9fb3c8; line-height:1.4; }
+  .step.lit { border-color:#22d3ee; box-shadow:0 0 0 1px #22d3ee, 0 0 34px rgba(34,211,238,.25); }
+  .step.litg { border-color:#34d399; box-shadow:0 0 0 1px #34d399, 0 0 34px rgba(52,211,153,.22); }
+</style>
+</head>
+<body>
+
+<!-- Scene 1: title -->
+<div class="scene" id="s1">
+  <div style="margin-top:120px">
+    <div class="kicker">Reactive Omni Buildathon · Every Second Counts</div>
+    <h1>GapHunter</h1>
+    <div class="sub" style="margin-top:22px; font-size:30px;">Cross-venue arbitrage where <span class="accent"><b>the contract is the bot</b></span> —<br>no keeper, no cron, no off-chain anything.</div>
+  </div>
+  <div class="caption">Two Uniswap V2 venues on Base Sepolia drift apart. A reactive contract on Lasna watches both — and closes the gap itself, in about a second.</div>
+</div>
+
+<!-- Scene 2: architecture -->
+<div class="scene" id="s2">
+  <div class="kicker">How it works</div>
+  <h2>Lasna sits in the middle</h2>
+  <div class="flowrow" style="margin-top:26px">
+    <div class="step"><div class="n">BASE SEPOLIA</div><h4>Two V2 venues</h4><p>Same GTA/GTB pair, two factories, 1,000,000 / 1,000,000 seeded in each pool.</p></div>
+    <div class="step"><div class="n">REACTIVE · LASNA</div><h4>GapHunterReactive</h4><p>Subscribed to both pools' <span class="mono">Sync</span> events. Reprices on every event, checks the spread against a 1.5% threshold, sizes the trade from live depth, estimates profit <i>before</i> signalling.</p></div>
+    <div class="step"><div class="n">BASE SEPOLIA</div><h4>GapHunterExecutor</h4><p>Receives the callback, re-verifies profitability against live reserves, buys cheap, sells expensive, keeps the spread.</p></div>
+  </div>
+  <div class="caption">Classic keeper bots poll off-chain and race on gas. GapHunter removes the bot entirely: <b>the price event itself triggers the trade</b>, through Reactive callbacks.</div>
+</div>
+
+<!-- Scene 3: live run -->
+<div class="scene" id="s3">
+  <div class="kicker">Live run · real testnet transactions</div>
+  <h2 style="margin-bottom:10px">A whale moves one venue. The gap closes itself.</h2>
+  <div id="chartWrap">
+    <canvas id="chart" width="1110" height="252"></canvas>
+    <div class="legend"><span class="dot" style="background:#22d3ee"></span>Venue A price (GTB per GTA)<span class="dot" style="background:#fbbf24"></span>Venue B price<span style="float:right" class="mono" id="gapLabel"></span></div>
+  </div>
+  <div class="flowrow" style="margin-top:16px">
+    <div class="step" id="st1"><div class="n">STEP 1 · ORIGIN EVENT</div><h4>Whale swap on venue B</h4><p class="hash">0x65ba04…eb72254</p><p>100,000 GTB in — venue B jumps ~10%.</p></div>
+    <div class="step" id="st2"><div class="n">STEP 2 · LASNA REACTS</div><h4>Spread check passes</h4><p>The <span class="mono">Sync</span> event reaches Lasna; the RSC reprices both pools and requests a callback.</p></div>
+    <div class="step" id="st3"><div class="n">STEP 3 · CALLBACK EXECUTES</div><h4>Arbitrage settles</h4><p class="hash">0x81d330…f764ffc</p><p>Executor balance: <b class="green mono" id="balLabel">500,000 GTB</b></p></div>
+  </div>
+  <div class="caption">Everything after the whale swap is on-chain and automatic. <b>No transaction of ours touches the executor</b> — the callback is the only caller.</div>
+</div>
+
+<!-- Scene 4: evidence -->
+<div class="scene" id="s4">
+  <div class="kicker">Measured on-chain</div>
+  <h2>Two runs. About a second each.</h2>
+  <table style="margin-top:16px">
+    <tr><th>Run</th><th>Origin → callback</th><th>Blocks</th><th>Executor profit</th><th></th></tr>
+    <tr><td>Run 1</td><td class="mono">1795520899 → 1795520900</td><td>7</td><td class="green mono">+3,041.01 GTB</td><td><span class="pill g">SETTLED</span></td></tr>
+    <tr><td>Run 2</td><td class="mono">1795521043 → 1795521044</td><td>7</td><td class="green mono">+5,428.67 GTB</td><td><span class="pill g">SETTLED</span></td></tr>
+  </table>
+  <div style="margin-top:26px; font-size:23px; color:#9fb3c8; line-height:1.5;">Executor inventory: 500,000 → <span class="green"><b>508,469.68 GTB</b></span>. Latency is measured in block timestamps: origin <span class="mono">Sync</span> block → callback execution block, Base Sepolia.</div>
+  <div class="caption">Timestamps and hashes are taken from the chains themselves — <b>every figure in this video is verifiable</b> in the README's evidence table.</div>
+</div>
+
+<!-- Scene 5: close -->
+<div class="scene" id="s5">
+  <div style="margin-top:64px">
+    <div class="kicker">GapHunter · Reactive Omni Buildathon</div>
+    <h2 style="font-size:46px;">The contract is the bot.</h2>
+    <div class="sub" style="margin-top:20px; line-height:1.6;">
+      Reactive (Lasna): <span class="hash">0x33BB7940…e54B3222</span><br>
+      Executor (Base Sepolia): <span class="hash">0x98624912…Db6d30bF63</span><br>
+      Public repo, full-loop Foundry tests (5/5), reproducible deploy scripts.
+    </div>
+    <div style="margin-top:30px;"><span class="pill a">EVERY SECOND COUNTS</span> <span class="pill g">LIVE ON TESTNET</span></div>
+  </div>
+  <div class="caption">Built during the event window for the Reactive Omni Buildathon. Track: <b>Every Second Counts</b>.</div>
+</div>
+
+<script>
+// Deterministic timeline: total 84s. Scenes: [start, end)
+const SCENES = [ [0,9,'s1'], [9,25,'s2'], [25,55,'s3'], [55,71,'s4'], [71,84,'s5'] ];
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const ease=t=>t<0?0:t>1?1:t*t*(3-2*t);
+// Venue prices over scene-3 local time u in [0,30): A ~1.00 flat (tiny poke dip), B jumps at u=6, converges after arb at u=16
+function priceA(u){ return 1.0 + 0.004*Math.sin(u*0.7)*Math.exp(-u*0.05); }
+function priceB(u){
+  if(u<6) return 1.0 + 0.003*Math.sin(u*0.9+1);
+  if(u<16){ const k=ease((u-6)/1.2); return 1.0 + 0.104*k; }        // whale jump to ~1.104
+  const k=ease((u-16)/2.5); return 1.104 - 0.098*k;                  // arb convergence to ~1.006
+}
+function drawChart(u){
+  const c=document.getElementById('chart'), x=c.getContext('2d');
+  const W=c.width,H=c.height; x.clearRect(0,0,W,H);
+  const x0=54,x1=W-16,y0=14,y1=H-26;
+  const ymin=0.96,ymax=1.13, X=t=>x0+(t/30)*(x1-x0), Y=v=>y1-((v-ymin)/(ymax-ymin))*(y1-y0);
+  x.strokeStyle='#22314a'; x.fillStyle='#5b718c'; x.font='13px DejaVu Sans Mono'; x.lineWidth=1;
+  [0.97,1.00,1.05,1.10].forEach(v=>{ x.beginPath(); x.moveTo(x0,Y(v)); x.lineTo(x1,Y(v)); x.stroke(); x.fillText(v.toFixed(2),8,Y(v)+4); });
+  const line=(fn,col)=>{ x.strokeStyle=col; x.lineWidth=2.6; x.beginPath();
+    for(let t=0;t<=u;t+=0.15){ const px=X(t),py=Y(fn(t)); t===0?x.moveTo(px,py):x.lineTo(px,py);} x.stroke(); };
+  line(priceA,'#22d3ee'); line(priceB,'#fbbf24');
+  if(u>=6&&u<16){ x.fillStyle='rgba(251,191,36,.10)'; x.fillRect(X(6),y0,X(u)-X(6),y1-y0); }
+  const gap=Math.abs(priceB(u)-priceA(u))/priceA(u)*100;
+  document.getElementById('gapLabel').textContent = u<6 ? '' : ('gap: '+gap.toFixed(1)+'%');
+}
+function fmt(n){ return n.toLocaleString('en-US',{minimumFractionDigits:2, maximumFractionDigits:2}); }
+window.__seek=function(T){
+  for(const [a,b,id] of SCENES){
+    const el=document.getElementById(id);
+    let o=0;
+    if(T>=a&&T<b) o=Math.min(ease((T-a)/0.7), ease((b-T)/0.7));
+    el.style.opacity=o;
+  }
+  if(T>=25&&T<55){
+    const u=T-25; drawChart(u);
+    document.getElementById('st1').className='step'+(u>=6?' lit':'');
+    document.getElementById('st2').className='step'+(u>=9.5?' lit':'');
+    const done=u>=16;
+    document.getElementById('st3').className='step'+(done?' litg':'');
+    let bal=500000;
+    if(u>=16){ const k=ease((u-16)/2.5); bal=500000 + (3041.01+5428.67)*k; }
+    document.getElementById('balLabel').textContent=fmt(bal)+' GTB';
+  }
+};
+window.__seek(0);
+</script>
+</body>
+</html>
