@@ -1,0 +1,18 @@
+deployer: 0xdb75249615a23133fD10b8e96B9220EF1B950B5d
+Base Sepolia ETH: 24967549492685559
+Lasna lREACT:     2100000000000000000
+== 1. Uniswap V2 factories (two venues) on Base Sepolia ==
+reusing factoryA: 0x33bb79402a0802be06d8b9f2b6171e80e54b3222 factoryB: 0x62e4ca89558d7a553d165332efffadf8221a2f3b
+== 2. Demo tokens ==
+GTA: 0x2250E6CAd8e9233eeb8f97434fA8aD2Cde071B1b  GTB: 0xD6a779b928d8F284C7A30347a8302e3E0579aA20
+== 3. Pairs + seeding (1,000,000 / 1,000,000 each) ==
+pairA: 0x633ECDA3DFDE4e508Be2c2807117B5Bc868019C3  pairB: 0x8e62F00356C75791570182bB1A412BC4129f387a
+pairs seeded
+== 4. GapHunterReactive on Lasna ==
+reactive: 0x33BB79402a0802bE06D8b9F2b6171e80e54B3222
+== 5. GapHunterExecutor on Base Sepolia ==
+executor: 0x986249121a4453294A68f6c7Cbc250Db6d30bF63
+executor wired + funded with token1 inventory
+== 6. Whale swap opens a gap on venue B ==
+seeded whale funds into pair B; execute the swap with the computed amount0Out next
+DONE (deployment). Addresses in deploy/addresses.json

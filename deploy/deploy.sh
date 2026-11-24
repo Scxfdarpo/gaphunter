@@ -21,7 +21,7 @@ cd "$(dirname "$0")/.."
 export PATH="$HOME/.foundry/bin:$PATH"
 
 BASE_RPC="https://sepolia.base.org"
-LASNA_RPC="https://lasna-rpc.rnk.dev/"
+LASNA_RPC="https://lasna-rpc.rnk.dev"
 BASE_PROXY="0x476F44b11F5C942c58f4c8E3d0300E5710743585"
 ADDR_FILE="deploy/addresses.json"
 
@@ -48,20 +48,29 @@ deploy_factory() { # $1 = label
 }
 
 echo "== 1. Uniswap V2 factories (two venues) on Base Sepolia =="
-FACTORY_A=$(deploy_factory A); save factoryA "$FACTORY_A"; echo "factoryA: $FACTORY_A"
-FACTORY_B=$(deploy_factory B); save factoryB "$FACTORY_B"; echo "factoryB: $FACTORY_B"
+if [ -f "$ADDR_FILE" ] && grep -q factoryA "$ADDR_FILE"; then
+  FACTORY_A=$(python3 -c "import json;print(json.load(open('deploy/addresses.json'))['factoryA'])")
+  FACTORY_B=$(python3 -c "import json;print(json.load(open('deploy/addresses.json'))['factoryB'])")
+  echo "reusing factoryA: $FACTORY_A factoryB: $FACTORY_B"
+else
+  FACTORY_A=$(deploy_factory A); save factoryA "$FACTORY_A"; echo "factoryA: $FACTORY_A"
+  FACTORY_B=$(deploy_factory B); save factoryB "$FACTORY_B"; echo "factoryB: $FACTORY_B"
+fi
 
 echo "== 2. Demo tokens =="
-GTA=$(forge create src/MockERC20.sol:MockERC20 --rpc-url $BASE_RPC --private-key "$PK" --constructor-args "Gap Token A" "GTA" 18 --json | python3 -c "import json,sys;print(json.load(sys.stdin)['deployedTo'])")
-GTB=$(forge create src/MockERC20.sol:MockERC20 --rpc-url $BASE_RPC --private-key "$PK" --constructor-args "Gap Token B" "GTB" 18 --json | python3 -c "import json,sys;print(json.load(sys.stdin)['deployedTo'])")
-save tokenA "$GTA"; save tokenB "$GTB"; echo "GTA: $GTA  GTB: $GTB"
+if grep -q tokenA "$ADDR_FILE" 2>/dev/null; then GTA=$(python3 -c "import json;print(json.load(open('deploy/addresses.json'))['tokenA'])"); else GTA=$(forge create --broadcast src/MockERC20.sol:MockERC20 --rpc-url $BASE_RPC --private-key "$PK" --json --constructor-args "Gap Token A" "GTA" 18 | python3 -c "import json,sys;print(json.load(sys.stdin)['deployedTo'])"); save tokenA "$GTA"; fi
+if grep -q tokenB "$ADDR_FILE" 2>/dev/null; then GTB=$(python3 -c "import json;print(json.load(open('deploy/addresses.json'))['tokenB'])"); else GTB=$(forge create --broadcast src/MockERC20.sol:MockERC20 --rpc-url $BASE_RPC --private-key "$PK" --json --constructor-args "Gap Token B" "GTB" 18 | python3 -c "import json,sys;print(json.load(sys.stdin)['deployedTo'])"); save tokenB "$GTB"; fi
+echo "GTA: $GTA  GTB: $GTB"
 
 echo "== 3. Pairs + seeding (1,000,000 / 1,000,000 each) =="
 for F in "$FACTORY_A" "$FACTORY_B"; do
-  cast send --rpc-url $BASE_RPC --private-key "$PK" "$F" "createPair(address,address)" "$GTA" "$GTB" >/dev/null
+  EXISTING=$(cast call --rpc-url $BASE_RPC "$F" "getPair(address,address)(address)" "$GTA" "$GTB")
+  if [ "$EXISTING" = "0x0000000000000000000000000000000000000000" ]; then
+    cast send --rpc-url $BASE_RPC --private-key "$PK" "$F" "createPair(address,address)" "$GTA" "$GTB" >/dev/null
+  fi
 done
-PAIR_A=$(cast call --rpc-url $BASE_RPC "$FACTORY_A" "getPair(address,address)" "$GTA" "$GTB")
-PAIR_B=$(cast call --rpc-url $BASE_RPC "$FACTORY_B" "getPair(address,address)" "$GTA" "$GTB")
+PAIR_A=$(cast call --rpc-url $BASE_RPC "$FACTORY_A" "getPair(address,address)(address)" "$GTA" "$GTB")
+PAIR_B=$(cast call --rpc-url $BASE_RPC "$FACTORY_B" "getPair(address,address)(address)" "$GTA" "$GTB")
 save pairA "$PAIR_A"; save pairB "$PAIR_B"; echo "pairA: $PAIR_A  pairB: $PAIR_B"
 TOKEN0=$(cast call --rpc-url $BASE_RPC "$PAIR_A" "token0()(address)")
 TOKEN1=$(cast call --rpc-url $BASE_RPC "$PAIR_A" "token1()(address)")
@@ -76,11 +85,11 @@ done
 echo "pairs seeded"
 
 echo "== 4. GapHunterReactive on Lasna =="
-RSC=$(forge create src/GapHunterReactive.sol:GapHunterReactive --rpc-url $LASNA_RPC --private-key "$PK" --value 5ether --constructor-args 84532 "$PAIR_A" "$PAIR_B" --json | python3 -c "import json,sys;print(json.load(sys.stdin)['deployedTo'])")
+RSC=$(forge create --broadcast src/GapHunterReactive.sol:GapHunterReactive --rpc-url $LASNA_RPC --private-key "$PK" --value 1.5ether --json --constructor-args 84532 "$PAIR_A" "$PAIR_B" | python3 -c "import json,sys;print(json.load(sys.stdin)['deployedTo'])")
 save reactive "$RSC"; echo "reactive: $RSC"
 
 echo "== 5. GapHunterExecutor on Base Sepolia =="
-EXEC=$(forge create src/GapHunterExecutor.sol:GapHunterExecutor --rpc-url $BASE_RPC --private-key "$PK" --value 0.05ether --constructor-args "$BASE_PROXY" "$RSC" --json | python3 -c "import json,sys;print(json.load(sys.stdin)['deployedTo'])")
+EXEC=$(forge create --broadcast src/GapHunterExecutor.sol:GapHunterExecutor --rpc-url $BASE_RPC --private-key "$PK" --value 0.003ether --json --constructor-args "$BASE_PROXY" "$RSC" | python3 -c "import json,sys;print(json.load(sys.stdin)['deployedTo'])")
 save executor "$EXEC"; echo "executor: $EXEC"
 cast send --rpc-url $LASNA_RPC --private-key "$PK" "$RSC" "setExecutor(address)" "$EXEC" >/dev/null
 cast send --rpc-url $BASE_RPC --private-key "$PK" "$TOKEN1" "mint(address,uint256)" "$EXEC" 500000000000000000000000 >/dev/null

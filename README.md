@@ -84,8 +84,44 @@ closed the gap at a profit.
 bash deploy/deploy.sh   # see the header for funding prerequisites
 ```
 
-## Evidence (live run)
+## Evidence (live run, 2026-11-24)
 
-_To be filled with the recorded deployment: contract addresses, the
-gap-opening transaction, the reactive transaction on Lasna, the callback
-transaction on Base Sepolia, and the origin→callback latency table._
+Deployed and exercised end-to-end on public testnets. Deployer:
+`0xdb75249615a23133fD10b8e96B9220EF1B950B5d`.
+
+### Contracts
+
+| Contract | Chain | Address |
+| --- | --- | --- |
+| Uniswap V2 factory A | Base Sepolia (84532) | `0x33bb79402a0802be06d8b9f2b6171e80e54b3222` |
+| Uniswap V2 factory B | Base Sepolia (84532) | `0x62e4ca89558d7a553d165332efffadf8221a2f3b` |
+| Gap Token A (token0) | Base Sepolia | `0x2250E6CAd8e9233eeb8f97434fA8aD2Cde071B1b` |
+| Gap Token B (token1) | Base Sepolia | `0xD6a779b928d8F284C7A30347a8302e3E0579aA20` |
+| Pair A (venue A) | Base Sepolia | `0x633ECDA3DFDE4e508Be2c2807117B5Bc868019C3` |
+| Pair B (venue B) | Base Sepolia | `0x8e62F00356C75791570182bB1A412BC4129f387a` |
+| **GapHunterReactive** | **Reactive Lasna (5318007)** | `0x33BB79402a0802bE06D8b9F2b6171e80e54B3222` |
+| **GapHunterExecutor** | **Base Sepolia (84532)** | `0x986249121a4453294A68f6c7Cbc250Db6d30bF63` |
+
+Both pairs seeded with 1,000,000 GTA / 1,000,000 GTB. The executor was
+funded with 500,000 GTB of trading inventory.
+
+### Full-loop runs
+
+A whale swap on venue B (100,000 GTB in) knocks venue B's price ~10–21%
+away from venue A. Nobody calls the executor: the pair's `Sync` event is
+delivered to the reactive contract on Lasna, which reprices both pools,
+confirms the spread clears its threshold, and requests a callback. The
+executor then buys GTA on the cheap venue and sells it on the expensive
+one, verifying profitability against live reserves before settling.
+
+| # | Origin event (Base Sepolia) | Reactive tx (Lasna) | Callback execution (Base Sepolia) | Origin ts → callback ts | Executor GTB after |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Whale swap `0x4a006218f4512ae3f8bc27b1841baf6f4d0a52da9b14cf522b7f6a33d2376494` (block 62994276), gap armed by a 1,000 GTB poke swap `0x77c4b3e8989d213932832bc324b9e23776dcb42a6d5bb4e5d133a241ed07ad9f` (block 62995152) | `0xcf1dc1b75a912757d83d9843a16146ad9281bc656ac11beeb199d73195af89ab` (block 9134595) — `PriceSeen`, `CallbackRequested`, `ArbSignalled` | `0x52a56282428e1da07843aee47a8a4a470e9f1e44a6c46fa47d97c7ca2da48d9a` (block 62995159) | 1795520899 → 1795520900 (**≈1 s**, 7 blocks) | 500,000 → **503,041.01** (+3,041.01) |
+| 2 | Whale swap `0x65ba04618c8ec579ec65271ef1bdb69a3d6d60739ee46be6d625f111ceb72254` (block 62995873) | (reactive delivery on Lasna, same pattern) | `0x81d3308961347438675a4ac26a2d17c13142accb72cbb5cc7faa2fdefc764ffc` (block 62995880) | 1795521043 → 1795521044 (**≈1 s**, 7 blocks) | 503,041.01 → **508,469.68** (+5,428.67) |
+
+Run 1 needed the extra poke because the reactive contract was deployed
+after the pairs were seeded, so it had not yet seen a `Sync` from venue A;
+run 2 is the clean single-event loop — one whale swap, one reactive
+reaction, one profitable arbitrage, about a second end to end, with no
+off-chain keeper anywhere in the loop. Total realised profit across the
+two runs: **+8,469.68 GTB** on 500,000 GTB of inventory.

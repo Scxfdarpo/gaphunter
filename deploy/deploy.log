@@ -1,0 +1,22 @@
+deployer: 0xdb75249615a23133fD10b8e96B9220EF1B950B5d
+Base Sepolia ETH: 25000000000000000
+Lasna lREACT:     2100000000000000000
+== 1. Uniswap V2 factories (two venues) on Base Sepolia ==
+factoryA: 0x33bb79402a0802be06d8b9f2b6171e80e54b3222
+factoryB: 0x62e4ca89558d7a553d165332efffadf8221a2f3b
+== 2. Demo tokens ==
+Error: Constructor argument count mismatch: expected 3 but got 4
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/usr/lib/python3.12/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
