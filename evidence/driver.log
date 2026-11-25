@@ -1,0 +1,38 @@
+11:15:33 minted 3,000,000 GTB to wallet
+11:15:37 minted 2,000,000 GTA to wallet
+11:15:49 run 3: whale GTB 100000 into pool B tx 0xd76cae29c29a.. block 63417407
+11:15:53 run 3: signalled nonce 3 spread 4420bps react 0x31e9074bee8b..
+11:16:11 run 3: EXECUTED profit 7773.8962 GTB latency 1s
+11:16:11 run 3 recorded: outcome=executed profit=7773.8961687204155
+11:16:11 run 4: pacing wait 41s (executor cooldown)
+11:17:34 run 4: whale GTB 200000 into pool A tx 0xa6a253165443.. block 63417767
+11:17:38 run 4: signalled nonce 4 spread 664bps react 0xdde73e4bc630..
+11:18:24 run 4: EXECUTED profit 460.8339 GTB latency 1s
+11:18:24 run 4 recorded: outcome=executed profit=460.83394141165445
+11:18:44 run 5: whale GTB 100000 into pool B tx 0x4409f923d48c.. block 63418279
+11:18:48 run 5: signalled nonce 5 spread 1843bps react 0x94ebb9349f9d..
+11:18:55 run 5: EXECUTED profit 3223.2973 GTB latency 1s
+11:18:55 run 5 recorded: outcome=executed profit=3223.2972682573563
+11:19:02 run 6: pacing wait 44s (executor cooldown)
+11:20:28 run 6: whale GTB 100000 into pool A tx 0x2688f0f24ea7.. block 63418658
+11:20:32 run 6: signalled nonce 6 spread 668bps react 0x74bda97a5966..
+11:20:41 run 6: EXECUTED profit 505.8590 GTB latency 1s
+11:20:41 run 6 recorded: outcome=executed profit=505.85896436332644
+11:20:42 run 7: pacing wait 21s (executor cooldown)
+11:21:57 run 7: whale GTB 100000 into pool B tx 0x77da559e03d0.. block 63419018
+11:22:03 run 7: signalled nonce 7 spread 1711bps react 0x51935103bc5a..
+Traceback (most recent call last):
+  File "/home/hatch/workspace/dorahacks/reactive-omni/gaphunter/evidence/batch_driver.py", line 347, in <module>
+    main()
+  File "/home/hatch/workspace/dorahacks/reactive-omni/gaphunter/evidence/batch_driver.py", line 216, in main
+    rec = do_run(run_no, target_buy, rec)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/dorahacks/reactive-omni/gaphunter/evidence/batch_driver.py", line 309, in do_run
+    ex = find_exec_log(nonce_before + 1, whale_block, cur)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/dorahacks/reactive-omni/gaphunter/evidence/batch_driver.py", line 150, in find_exec_log
+    logs = rpc(BASE_URLS, "eth_getLogs", [{"address": EXEC, "fromBlock": hex(from_block),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/dorahacks/reactive-omni/gaphunter/evidence/batch_driver.py", line 51, in rpc
+    raise RuntimeError(f"rpc {method} failed: {last}")
+RuntimeError: rpc eth_getLogs failed: HTTP Error 400: Bad Request

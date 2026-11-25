@@ -23,8 +23,9 @@ Built for the **Reactive Omni Buildathon — Every Second Counts** track.
 ## Why it scores
 
 - **Execution** — the complete event → react → callback loop runs on public
-  testnets with recorded transaction hashes and a measured latency table
-  (see *Evidence* below). Nothing is simulated.
+  testnets: **20 live full-loop runs, 20 executed, 0 refused**, latency
+  p50 = p95 = 1 s, total profit +45,629.70 GTB, every run recorded with
+  its transaction hashes (see *Evidence* below). Nothing is simulated.
 - **Integration** — the reactive contract *is* the strategy: it holds both
   pools' prices, applies the threshold, sizes the trade from live pool
   depth, and estimates the round-trip profit before spending a callback.
@@ -117,7 +118,7 @@ one, verifying profitability against live reserves before settling.
 | # | Origin event (Base Sepolia) | Reactive tx (Lasna) | Callback execution (Base Sepolia) | Origin ts → callback ts | Executor GTB after |
 | --- | --- | --- | --- | --- | --- |
 | 1 | Whale swap `0x4a006218f4512ae3f8bc27b1841baf6f4d0a52da9b14cf522b7f6a33d2376494` (block 62994276), gap armed by a 1,000 GTB poke swap `0x77c4b3e8989d213932832bc324b9e23776dcb42a6d5bb4e5d133a241ed07ad9f` (block 62995152) | `0xcf1dc1b75a912757d83d9843a16146ad9281bc656ac11beeb199d73195af89ab` (block 9134595) — `PriceSeen`, `CallbackRequested`, `ArbSignalled` | `0x52a56282428e1da07843aee47a8a4a470e9f1e44a6c46fa47d97c7ca2da48d9a` (block 62995159) | 1795520899 → 1795520900 (**≈1 s**, 7 blocks) | 500,000 → **503,041.01** (+3,041.01) |
-| 2 | Whale swap `0x65ba04618c8ec579ec65271ef1bdb69a3d6d60739ee46be6d625f111ceb72254` (block 62995873) | (reactive delivery on Lasna, same pattern) | `0x81d3308961347438675a4ac26a2d17c13142accb72cbb5cc7faa2fdefc764ffc` (block 62995880) | 1795521043 → 1795521044 (**≈1 s**, 7 blocks) | 503,041.01 → **508,469.68** (+5,428.67) |
+| 2 | Whale swap `0x65ba04618c8ec579ec65271ef1bdb69a3d6d60739ee46be6d625f111ceb72254` (block 62995873) | `0xdfed9b8a354cb7c76018bc09d84b692d1c9ba4bd6cef3c03eb107372d3a3342d` (block 9134732) — `ArbSignalled` nonce 2 | `0x81d3308961347438675a4ac26a2d17c13142accb72cbb5cc7faa2fdefc764ffc` (block 62995880) | 1795521043 → 1795521044 (**≈1 s**, 7 blocks) | 503,041.01 → **508,469.68** (+5,428.67) |
 
 Run 1 needed the extra poke because the reactive contract was deployed
 after the pairs were seeded, so it had not yet seen a `Sync` from venue A;
@@ -125,3 +126,52 @@ run 2 is the clean single-event loop — one whale swap, one reactive
 reaction, one profitable arbitrage, about a second end to end, with no
 off-chain keeper anywhere in the loop. Total realised profit across the
 two runs: **+8,469.68 GTB** on 500,000 GTB of inventory.
+
+*Address note:* factory A on Base Sepolia and `GapHunterReactive` on
+Lasna share the address `0x33BB79402a…` because the same deployer wallet
+deployed both at the same nonce on two different chains. Same string,
+different chains — expected, not an error.
+
+### Batch extension (2026-11-25): 20 runs, with a polling baseline
+
+Runs 3–20 repeated the loop with alternating whale direction (18 runs,
+100,000–200,000 tokens per whale swap). Every callback was verified
+on-chain via its `ArbExecuted` log and the executor's balance delta.
+
+- **20 runs total: 20 executed, 0 refused, 0 failed.**
+- **Latency: p50 = 1 s, p95 = 1 s** (Base Sepolia block timestamps;
+  median 5.5 blocks, origin event → callback executed).
+- **Profit: +37,160.02 GTB in the batch; +45,629.70 GTB across all 20
+  runs.** On-chain reconciliation is exact: the executor's `totalProfit`
+  counter reads 45,629.698188 GTB and its balance is 545,629.70 GTB =
+  500,000 inventory + total profit.
+- Per-run records (whale / reactive / callback hashes, timestamps,
+  profit): [`evidence/runs.json`](evidence/runs.json).
+
+During the batch, a baseline poller sampled both pairs' reserves every
+2 seconds (762 samples, [`evidence/baseline.md`](evidence/baseline.md)).
+A polling keeper would have **missed 2 of the 18 gaps entirely**: on
+those thin runs the reactive loop executed ~1 s after the whale swap
+and knocked the spread below the 150 bps threshold before the poller's
+next tick — at polling cadence, those opportunities never existed. On
+the gaps it did catch, the poller's *detection* lag (median 0.28 s) is
+only the first half of its problem: it still has to sign and land its
+own transaction from a server that must stay up. The reactive numbers
+above are the full loop, executed, with no server at all.
+
+### Limitations
+
+- Testnet demonstration: both venues are self-deployed Uniswap V2
+  pools and GTA/GTB are valueless demo tokens; the price gaps are
+  opened by our own whale swaps. What is proven is the pattern — a
+  contract that watches, decides and executes with no off-chain
+  component — not mainnet profitability.
+- We checked mainnet ourselves: a 20-minute scan of Base mainnet
+  (3,000 samples across the deepest V2-style pairs) found **zero**
+  net-profitable gaps after the ~60 bps two-leg fee hurdle. On live
+  markets this design would need a structurally different edge
+  (near-zero-fee venues or sub-block execution); we say so rather than
+  imply otherwise.
+- Latency is measured on Base Sepolia block timestamps (1-second
+  granularity); sub-second differences are not resolvable from chain
+  data.
