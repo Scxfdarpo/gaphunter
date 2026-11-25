@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GapHunter — live dashboard</title>
+<style>
+  :root {
+    --fg: #1a1d21; --muted: #5b6470; --line: #d9dee5; --bg: #ffffff;
+    --panel: #f6f8fa; --accent: #0b5cad; --ok: #137333; --bad: #b3261e;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; color: var(--fg); background: var(--bg);
+         font: 15px/1.55 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  main { max-width: 1080px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1 { font-size: 28px; margin: 0 0 4px; }
+  h2 { font-size: 18px; margin: 36px 0 12px; }
+  .sub { color: var(--muted); margin: 0 0 8px; max-width: 72ch; }
+  .links { font-size: 14px; }
+  .links a { color: var(--accent); text-decoration: none; margin-right: 14px; }
+  .links a:hover { text-decoration: underline; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+           gap: 12px; margin: 16px 0 4px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+          padding: 12px 14px; }
+  .card .k { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  .card .v { font-size: 22px; font-weight: 600; margin-top: 2px; }
+  .card .v small { font-size: 13px; font-weight: 400; color: var(--muted); }
+  .status { font-size: 13px; color: var(--muted); margin-top: 10px; }
+  .status .err { color: var(--bad); }
+  button { font: inherit; font-size: 13px; padding: 4px 10px; border: 1px solid var(--line);
+           background: var(--bg); border-radius: 6px; cursor: pointer; }
+  button:hover { background: var(--panel); }
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th, td { padding: 7px 10px; border-bottom: 1px solid var(--line); text-align: left;
+           white-space: nowrap; }
+  th { background: var(--panel); font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .mono { font-family: var(--mono); font-size: 12.5px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .badge { font-size: 12px; padding: 1px 7px; border-radius: 99px; border: 1px solid var(--line); }
+  .badge.executed { color: var(--ok); border-color: var(--ok); }
+  .badge.refused, .badge.failed { color: var(--bad); border-color: var(--bad); }
+  .note { color: var(--muted); font-size: 13.5px; max-width: 78ch; }
+  footer { margin-top: 44px; color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>GapHunter — a reactive cross-pool arbitrage sentinel</h1>
+  <p class="sub">A Reactive Smart Contract on Lasna watches two Uniswap V2 pools on
+    Base Sepolia. When their prices diverge beyond a fee-adjusted threshold it orders
+    the arbitrage itself — no server, no keeper, no human trigger. This page reads the
+    live chain state and the recorded run ledger.</p>
+  <p class="links">
+    <a href="https://github.com/Scxfdarpo/gaphunter">GitHub</a>
+    <a href="https://dorahacks.io/buidl/51863">DoraHacks BUIDL</a>
+    <a href="https://repo.sourcify.dev/84532/0x986249121a4453294A68f6c7Cbc250Db6d30bF63">Executor (Sourcify, exact match)</a>
+    <a href="https://repo.sourcify.dev/5318007/0x33BB79402a0802bE06D8b9F2b6171e80e54B3222">Reactive contract (Sourcify, exact match)</a>
+  </p>
+
+  <h2>Live chain state — Base Sepolia</h2>
+  <div class="cards" id="live-cards">
+    <div class="card"><div class="k">Spread (A vs B)</div><div class="v" id="lv-spread">…</div></div>
+    <div class="card"><div class="k">Price A (GTB per GTA)</div><div class="v" id="lv-pricea">…</div></div>
+    <div class="card"><div class="k">Price B (GTB per GTA)</div><div class="v" id="lv-priceb">…</div></div>
+    <div class="card"><div class="k">Executor GTB balance</div><div class="v" id="lv-balance">…</div></div>
+    <div class="card"><div class="k">Executor total profit (on-chain)</div><div class="v" id="lv-profit">…</div></div>
+    <div class="card"><div class="k">Arbitrages executed (on-chain)</div><div class="v" id="lv-arbs">…</div></div>
+  </div>
+  <p class="status"><span id="live-status">Loading live state…</span>
+    <button id="refresh" type="button">Refresh</button></p>
+
+  <h2>Run ledger — recorded evidence</h2>
+  <div class="cards" id="stat-cards">
+    <div class="card"><div class="k">Full-loop runs</div><div class="v" id="st-runs">…</div></div>
+    <div class="card"><div class="k">Latency p50</div><div class="v" id="st-p50">…</div></div>
+    <div class="card"><div class="k">Latency p95</div><div class="v" id="st-p95">…</div></div>
+    <div class="card"><div class="k">Total realised profit</div><div class="v" id="st-profit">…</div></div>
+  </div>
+  <p class="status" id="ledger-status">Loading ledger…</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr>
+        <th>#</th><th>Date</th><th>Whale swap</th><th>Reactive tx (Lasna)</th>
+        <th>Callback (Base Sepolia)</th><th class="num">Latency</th>
+        <th class="num">Profit (GTB)</th><th>Outcome</th>
+      </tr></thead>
+      <tbody id="runs-body"></tbody>
+    </table>
+  </div>
+  <p class="note">Latency is origin event → callback executed, from Base Sepolia block
+    timestamps (1-second granularity). The full machine-readable ledger, including pool
+    reserves before/after and per-run balances, is
+    <a href="https://github.com/Scxfdarpo/gaphunter/blob/master/evidence/runs.json">evidence/runs.json</a>
+    in the repository.</p>
+
+  <footer>
+    Testnet demonstration: both venues are self-deployed Uniswap V2 pools and GTA/GTB
+    are valueless demo tokens; gaps are opened by our own whale swaps. What is proven is
+    the pattern — a contract that watches, decides and executes with no off-chain
+    component — not mainnet profitability. Live state is read directly from the public
+    Base Sepolia RPC by your browser; nothing on this page is served by us.
+  </footer>
+</main>
+
+<script>
+"use strict";
+// ---- configuration (deploy/addresses.json) --------------------------------
+const RPC = "https://sepolia.base.org";
+const PAIR_A = "0x633ECDA3DFDE4e508Be2c2807117B5Bc868019C3";
+const PAIR_B = "0x8e62F00356C75791570182bB1A412BC4129f387a";
+const EXECUTOR = "0x986249121a4453294A68f6c7Cbc250Db6d30bF63";
+const GTB = "0xD6a779b928d8F284C7A30347a8302e3E0579aA20"; // token1 / inventory token
+const RUNS_URL = "https://raw.githubusercontent.com/Scxfdarpo/gaphunter/master/evidence/runs.json";
+const BASE_EXPLORER = "https://sepolia.basescan.org/tx/";
+const LASNA_EXPLORER = "https://lasna.reactscan.net/tx/";
+
+// function selectors
+const SEL_GET_RESERVES = "0x0902f1ac";
+const SEL_BALANCE_OF   = "0x70a08231";
+const SEL_TOTAL_PROFIT = "0x86001519";
+const SEL_ARBS_EXEC    = "0x7f482c42";
+
+// ---- tiny JSON-RPC client ---------------------------------------------------
+let rpcId = 0;
+async function ethCall(to, data, timeoutMs = 12000) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const res = await fetch(RPC, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ jsonrpc: "2.0", id: ++rpcId, method: "eth_call",
+                             params: [{ to, data }, "latest"] }),
+      signal: ctrl.signal,
+    });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const j = await res.json();
+    if (j.error) throw new Error(j.error.message || "RPC error");
+    return j.result;
+  } finally { clearTimeout(timer); }
+}
+const word = (hex, i) => BigInt("0x" + hex.slice(2 + i * 64, 2 + (i + 1) * 64));
+const padAddr = (a) => a.toLowerCase().replace("0x", "").padStart(64, "0");
+
+// ---- formatting --------------------------------------------------------------
+function fmtWei(v) { // BigInt wei (18 dp) -> grouped decimal string, up to 4 dp
+  const whole = v / 10n ** 18n, rem = v % 10n ** 18n;
+  const frac = (rem * 10000n / 10n ** 18n).toString().padStart(4, "0").replace(/0+$/, "");
+  return whole.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (frac ? "." + frac : "");
+}
+function fmtNum(x, dp = 2) {
+  return Number(x).toLocaleString("en-US", { minimumFractionDigits: dp, maximumFractionDigits: dp });
+}
+const short = (h) => h ? h.slice(0, 10) + "…" + h.slice(-6) : "—";
+const txLink = (base, h) => h
+  ? `<a class="mono" href="${base}${h}" title="${h}" target="_blank" rel="noopener">${short(h)}</a>` : "—";
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+// ---- live chain state ---------------------------------------------------------
+async function loadLive() {
+  const status = document.getElementById("live-status");
+  try {
+    const [resA, resB, bal, profit, arbs] = await Promise.all([
+      ethCall(PAIR_A, SEL_GET_RESERVES),
+      ethCall(PAIR_B, SEL_GET_RESERVES),
+      ethCall(GTB, SEL_BALANCE_OF + padAddr(EXECUTOR)),
+      ethCall(EXECUTOR, SEL_TOTAL_PROFIT),
+      ethCall(EXECUTOR, SEL_ARBS_EXEC),
+    ]);
+    const pA = Number(word(resA, 1)) / Number(word(resA, 0)); // GTB per GTA
+    const pB = Number(word(resB, 1)) / Number(word(resB, 0));
+    const spreadBps = Math.abs(pA - pB) / Math.min(pA, pB) * 10000;
+    document.getElementById("lv-spread").innerHTML =
+      fmtNum(spreadBps, 1) + " <small>bps (" + fmtNum(spreadBps / 100, 2) + "%)</small>";
+    document.getElementById("lv-pricea").textContent = fmtNum(pA, 4);
+    document.getElementById("lv-priceb").textContent = fmtNum(pB, 4);
+    document.getElementById("lv-balance").innerHTML = fmtWei(word(bal, 0)) + " <small>GTB</small>";
+    document.getElementById("lv-profit").innerHTML = fmtWei(word(profit, 0)) + " <small>GTB</small>";
+    document.getElementById("lv-arbs").textContent = word(arbs, 0).toString();
+    status.textContent = "Live — updated " + new Date().toLocaleTimeString() +
+      " via " + RPC + " (auto-refreshes every 30 s).";
+  } catch (e) {
+    status.innerHTML = '<span class="err">Live state unavailable (' + esc(e.message) +
+      ') — the recorded ledger below is unaffected.</span>';
+  }
+}
+
+// ---- run ledger -----------------------------------------------------------------
+async function loadLedger() {
+  const status = document.getElementById("ledger-status");
+  try {
+    const res = await fetch(RUNS_URL, { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const data = await res.json();
+    const runs = data.runs || [];
+    const st = data.stats || {};
+    const lat = runs.map(r => r.latencySec).filter(x => typeof x === "number").sort((a, b) => a - b);
+    const pct = (arr, p) => arr.length ? arr[Math.min(arr.length - 1, Math.floor(p / 100 * arr.length))] : null;
+    const profit = (st.totalProfitGTB != null) ? st.totalProfitGTB
+      : runs.reduce((s, r) => s + (r.profitGTB || 0), 0);
+    document.getElementById("st-runs").innerHTML =
+      (st.totalRuns != null ? st.totalRuns : runs.length) +
+      ' <small>(' + (st.executed != null ? st.executed : runs.filter(r => r.outcome === "executed").length) +
+      " executed, " + (st.refused || 0) + " refused)</small>";
+    const p50 = st.latencySecP50 != null ? st.latencySecP50 : pct(lat, 50);
+    const p95 = st.latencySecP95 != null ? st.latencySecP95 : pct(lat, 95);
+    const blk = runs.map(r => r.latencyBlocks).filter(x => typeof x === "number").sort((a, b) => a - b);
+    const b50 = st.latencyBlocksP50 != null ? st.latencyBlocksP50
+      : (st.latencyBlocksMedian != null ? st.latencyBlocksMedian : pct(blk, 50));
+    const b95 = st.latencyBlocksP95 != null ? st.latencyBlocksP95 : pct(blk, 95);
+    document.getElementById("st-p50").innerHTML = p50 + ' <small>s (median ' + b50 + ' blocks)</small>';
+    document.getElementById("st-p95").innerHTML = p95 + ' <small>s (p95 ' + b95 + ' blocks)</small>';
+    document.getElementById("st-profit").innerHTML = fmtNum(profit) + " <small>GTB</small>";
+
+    const body = document.getElementById("runs-body");
+    body.innerHTML = runs.slice().reverse().map(r => `<tr>
+      <td>${r.run}</td>
+      <td>${esc(r.date || "")}</td>
+      <td>${txLink(BASE_EXPLORER, r.whaleTx)} <span class="note">pool ${esc(r.whalePool || "")}` +
+        (r.whaleAmountIn ? `, ${fmtNum(r.whaleAmountIn, 0)} ${esc(r.whaleTokenIn || "")}` : "") + `</span></td>
+      <td>${txLink(LASNA_EXPLORER, r.reactTx)}</td>
+      <td>${txLink(BASE_EXPLORER, r.callbackTx)}</td>
+      <td class="num">${r.latencySec != null ? r.latencySec + " s / " + r.latencyBlocks + " blk" : "—"}</td>
+      <td class="num">${r.profitGTB != null ? "+" + fmtNum(r.profitGTB) : "—"}</td>
+      <td><span class="badge ${esc(r.outcome || "")}">${esc(r.outcome || "")}</span></td>
+    </tr>`).join("");
+    status.textContent = "Ledger loaded from evidence/runs.json (" + runs.length + " runs).";
+  } catch (e) {
+    status.innerHTML = '<span class="err">Ledger unavailable (' + esc(e.message) +
+      ') — read it directly in the repository: evidence/runs.json.</span>';
+  }
+}
+
+document.getElementById("refresh").addEventListener("click", loadLive);
+loadLive();
+loadLedger();
+setInterval(loadLive, 30000);
+</script>
+</body>
+</html>
