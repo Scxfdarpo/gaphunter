@@ -1,0 +1,20 @@
+{
+  "factoryA": "0x33bb79402a0802be06d8b9f2b6171e80e54b3222",
+  "factoryB": "0x62E4CA89558d7A553D165332eFfFadf8221A2f3B",
+  "tokenA": "0xD6a779b928d8F284C7A30347a8302e3E0579aA20",
+  "tokenB": "0x2250E6CAd8e9233eeb8f97434fA8aD2Cde071B1b",
+  "pairA": "0x633ECDA3DFDE4e508Be2c2807117B5Bc868019C3",
+  "pairB": "0x8e62F00356C75791570182bB1A412BC4129f387a",
+  "token0": "0x2250E6CAd8e9233eeb8f97434fA8aD2Cde071B1b",
+  "token1": "0xD6a779b928d8F284C7A30347a8302e3E0579aA20",
+  "reactive": "0xD6a779b928d8F284C7A30347a8302e3E0579aA20",
+  "executor": "0xBD1E78903d4703D7C1Ec1B044b2F807778CE5C53",
+  "chainId": "1301",
+  "callbackProxy": "0x775c9B990ADe401060B78D0e98684eEf8d2466C1",
+  "funding": {
+    "route": "Ethereum Sepolia -> L1StandardBridge 0xea58fcA6849d79EAd1f26608855c2D6407d54Ce2 depositETH(200000, 0x)",
+    "bridgeDepositTx": "0x3b61ac95e866ed09180b2ffea0d06ad69f1e01c65a779a499a48cd6b4a6f9e68",
+    "amountBridgedETH": "0.002",
+    "rsc2FundingLReact": "0.25"
+  }
+}

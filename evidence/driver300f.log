@@ -1,0 +1,319 @@
+13:03:30 resuming; already recorded: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184]
+13:03:32 run 184: RSC lREACT low (0.0009); attempting top-up
+13:03:38 run 184: topped RSC with 15.7479 lREACT from wallet
+13:04:01 run 184: whale GTB 100000 into pool A tx 0x00eb4ecc7ecf.. block 63737838
+13:04:47 run 184: NO SIGNAL
+13:04:50 run 184: fuel stall (debt 0.013647 lREACT, RSC 15.748821777970683 lREACT) - pausing for fuel
+13:04:53 run 184: FUEL WAIT (RSC 15.7488 lREACT, debt 0.013647)
+13:05:00 cast send retry 0 
+13:05:06 cast send retry 1 
+13:05:15 cast send retry 2 
+13:05:27 cast send retry 3 
+13:05:39 run 184: fuel heal attempt hiccup: cast send withdraw(address,uint256) failed: 
+13:08:42 run 184: fuel restored (RSC 15.7352 lREACT, debt 0) - resuming
+13:09:03 run 184: whale GTB 100000 into pool A tx 0xe80eb709bfaf.. block 63739376
+13:09:13 run 184: signalled nonce 184 spread 2593bps react 0xf7d304bf5c34..
+13:09:28 run 184: EXECUTED profit 13273.5973 GTB latency 1s
+13:09:36 run 184 recorded: outcome=executed profit=13273.59731928661
+13:09:38 run 185: pacing wait 28s (executor cooldown)
+13:10:18 run 185: whale GTA 100000 into pool A tx 0xd36ace8656f7.. block 63739739
+13:10:21 run 185: signalled nonce 185 spread 3697bps react 0x277501bbdee1..
+13:10:29 run 185: EXECUTED profit 13896.3215 GTB latency 1s
+13:10:40 run 185 recorded: outcome=executed profit=13896.32147293403
+13:10:44 run 186: pacing wait 34s (executor cooldown)
+13:11:35 run 186: whale GTA 100000 into pool B tx 0x260209491482.. block 63740138
+13:11:39 run 186: signalled nonce 186 spread 2478bps react 0x1b69d16e97a5..
+13:11:48 run 186: EXECUTED profit 7910.8902 GTB latency 1s
+13:11:55 run 186 recorded: outcome=executed profit=7910.89017617333
+13:12:00 run 187: pacing wait 39s (executor cooldown)
+13:12:55 run 187: whale GTA 100000 into pool A tx 0x5c764778aa6f.. block 63740508
+13:12:59 run 187: signalled nonce 187 spread 2973bps react 0x6705bf9d0cbf..
+13:13:14 run 187: EXECUTED profit 8822.2042 GTB latency 1s
+13:13:21 run 187 recorded: outcome=executed profit=8822.204157559627
+13:13:23 run 188: pacing wait 29s (executor cooldown)
+13:14:04 run 188: whale GTA 100000 into pool B tx 0xadf7e4dac654.. block 63740871
+13:14:10 run 188: signalled nonce 188 spread 2097bps react 0x7476c56b24ee..
+13:14:30 run 188: EXECUTED profit 5326.9917 GTB latency 1s
+13:15:25 run 188 recorded: outcome=executed profit=5326.991742161705
+13:15:44 run 189: whale GTA 100000 into pool A tx 0x659452b6aa19.. block 63741344
+13:15:51 run 189: signalled nonce 189 spread 2506bps react 0x54ea93a44a91..
+13:16:04 run 189: EXECUTED profit 6075.3231 GTB latency 2s
+13:16:15 run 189 recorded: outcome=executed profit=6075.323060339127
+13:16:17 run 190: pacing wait 23s (executor cooldown)
+13:16:51 run 190: whale GTA 100000 into pool B tx 0x3a50e51c5569.. block 63741715
+13:16:55 run 190: signalled nonce 190 spread 1836bps react 0x49a80581c26b..
+13:17:07 run 190: EXECUTED profit 3828.8024 GTB latency 2s
+13:17:14 run 190 recorded: outcome=executed profit=3828.802376515853
+13:17:16 run 191: pacing wait 39s (executor cooldown)
+13:18:11 run 191: whale GTA 100000 into pool A tx 0xdc9d68d9691c.. block 63742118
+13:18:15 run 191: signalled nonce 191 spread 2180bps react 0x921622e98a96..
+13:18:24 run 191: EXECUTED profit 4425.0700 GTB latency 1s
+13:18:31 run 191 recorded: outcome=executed profit=4425.069962530585
+13:18:33 run 192: pacing wait 41s (executor cooldown)
+13:19:24 run 192: whale GTA 100000 into pool B tx 0xbe1978fcadc0.. block 63742483
+13:19:28 run 192: signalled nonce 192 spread 1646bps react 0xdbc020658003..
+13:19:36 run 192: EXECUTED profit 2883.1273 GTB latency 2s
+13:19:43 run 192 recorded: outcome=executed profit=2883.127297950303
+13:19:45 run 193: pacing wait 44s (executor cooldown)
+13:20:44 run 193: whale GTB 100000 into pool B tx 0xab45221c8db6.. block 63742880
+13:20:50 run 193: signalled nonce 193 spread 778bps react 0xe998898a8e17..
+13:21:05 run 193: EXECUTED profit 809.0468 GTB latency 1s
+13:21:12 run 193 recorded: outcome=executed profit=809.0468371282208
+13:21:13 run 194: pacing wait 33s (executor cooldown)
+13:22:13 run 194: whale GTB 100000 into pool A tx 0xb1f61f7ffd27.. block 63743328
+13:22:17 run 194: signalled nonce 194 spread 1540bps react 0x4f2333015b5a..
+13:23:12 run 194: EXECUTED profit 2822.1989 GTB latency 1s
+13:23:33 run 194 recorded: outcome=executed profit=2822.19888979497
+13:24:18 run 195: whale GTB 100000 into pool B tx 0x82650e8f1167.. block 63743775
+13:24:22 run 195: signalled nonce 195 spread 768bps react 0xacfd9d30f438..
+13:24:39 run 195: EXECUTED profit 837.9052 GTB latency 1s
+13:24:57 run 195 recorded: outcome=executed profit=837.905214457676
+13:25:19 run 196: whale GTB 100000 into pool A tx 0x41857895ff15.. block 63744245
+13:25:26 run 196: signalled nonce 196 spread 1449bps react 0xea0f50e80e3b..
+13:25:33 run 196: EXECUTED profit 2764.3139 GTB latency 2s
+13:25:38 run 196 recorded: outcome=executed profit=2764.313912719312
+13:25:42 run 197: pacing wait 39s (executor cooldown)
+13:26:40 run 197: whale GTB 100000 into pool B tx 0x916f3068f277.. block 63744659
+13:26:45 run 197: signalled nonce 197 spread 758bps react 0x1551def42dd5..
+13:27:15 run 197: EXECUTED profit 864.9502 GTB latency 2s
+13:27:29 run 197 recorded: outcome=executed profit=864.9501974383502
+13:27:43 run 198: pacing wait 0s (executor cooldown)
+13:28:04 run 198: whale GTB 100000 into pool A tx 0x386d4132ba73.. block 63745052
+13:28:10 run 198: signalled nonce 198 spread 1369bps react 0x73191a4212ad..
+13:28:25 run 198: EXECUTED profit 2709.1303 GTB latency 0s
+13:28:32 run 198 recorded: outcome=executed profit=2709.130304913059
+13:28:34 run 199: pacing wait 27s (executor cooldown)
+13:29:14 run 199: whale GTB 100000 into pool B tx 0x37d40c7255d6.. block 63745416
+13:29:21 run 199: signalled nonce 199 spread 749bps react 0x9cb07eea31b7..
+13:30:18 run 199: EXECUTED profit 890.2898 GTB latency 1s
+13:30:25 run 199 recorded: outcome=executed profit=890.2897631243188
+13:30:46 run 200: whale GTB 100000 into pool A tx 0xbfa9761ed148.. block 63745890
+13:30:52 run 200: signalled nonce 200 spread 1300bps react 0x0bdc3c6ae702..
+13:31:02 run 200: EXECUTED profit 2656.3723 GTB latency 1s
+13:31:06 run 200 recorded: outcome=executed profit=2656.372336002432
+13:31:08 run 201: pacing wait 41s (executor cooldown)
+13:32:05 run 201: whale GTB 100000 into pool B tx 0xecbdb437a31a.. block 63746275
+13:32:15 run 201: signalled nonce 201 spread 741bps react 0x4185bd18b117..
+13:32:29 run 201: EXECUTED profit 914.0209 GTB latency 2s
+13:32:35 run 201 recorded: outcome=executed profit=914.0208524724037
+13:32:37 run 202: pacing wait 29s (executor cooldown)
+13:33:20 run 202: whale GTB 100000 into pool A tx 0x429c8265f042.. block 63746653
+13:33:24 run 202: signalled nonce 202 spread 1239bps react 0xe9b480c03b48..
+13:33:33 run 202: EXECUTED profit 2605.8133 GTB latency 1s
+13:33:39 run 202 recorded: outcome=executed profit=2605.813302004367
+13:33:41 run 203: pacing wait 41s (executor cooldown)
+13:34:34 run 203: whale GTB 100000 into pool B tx 0x52da04d93b3c.. block 63747023
+13:34:43 run 203: signalled nonce 203 spread 733bps react 0xbc58c92f4aa9..
+13:34:51 run 203: EXECUTED profit 936.2313 GTB latency 1s
+13:35:03 run 203 recorded: outcome=executed profit=936.2313316586065
+13:35:07 run 204: pacing wait 28s (executor cooldown)
+13:35:51 run 204: whale GTB 100000 into pool A tx 0x074257bb6f3e.. block 63747405
+13:35:54 run 204: signalled nonce 204 spread 1185bps react 0xaee9312766af..
+13:36:01 run 204: EXECUTED profit 2557.2635 GTB latency 2s
+13:36:07 run 204 recorded: outcome=executed profit=2557.263529954504
+13:36:09 run 205: pacing wait 44s (executor cooldown)
+13:37:06 run 205: whale GTB 100000 into pool B tx 0x3aac9311482f.. block 63747790
+13:37:12 run 205: signalled nonce 205 spread 725bps react 0xf2a73b55cd5a..
+13:37:53 run 205: EXECUTED profit 957.0015 GTB latency 1s
+13:38:07 run 205 recorded: outcome=executed profit=957.0014730725238
+13:38:29 run 206: whale GTB 100000 into pool A tx 0x6b16e161989a.. block 63748198
+13:38:32 run 206: signalled nonce 206 spread 1137bps react 0x7261ce28273c..
+13:38:48 run 206: EXECUTED profit 2510.5619 GTB latency 1s
+13:38:59 run 206 recorded: outcome=executed profit=2510.5618692914277
+13:39:03 run 207: pacing wait 28s (executor cooldown)
+13:39:48 run 207: whale GTB 100000 into pool B tx 0xc06d70b8bee9.. block 63748603
+13:39:52 run 207: signalled nonce 207 spread 718bps react 0x3f2380fbdd03..
+13:40:01 run 207: EXECUTED profit 976.4051 GTB latency 1s
+13:40:05 run 207 recorded: outcome=executed profit=976.4050958669621
+13:40:10 run 208: pacing wait 42s (executor cooldown)
+13:41:07 run 208: whale GTB 100000 into pool A tx 0x4d9812475c53.. block 63748963
+13:41:11 run 208: signalled nonce 208 spread 1094bps react 0xc2f107dc74f7..
+13:41:25 run 208: EXECUTED profit 2465.5695 GTB latency 2s
+13:41:31 run 208 recorded: outcome=executed profit=2465.5695309993043
+13:41:35 run 209: pacing wait 29s (executor cooldown)
+13:42:13 run 209: whale GTB 100000 into pool B tx 0x3081b585e0e4.. block 63749326
+13:42:16 run 209: signalled nonce 209 spread 711bps react 0xf2f6ff957627..
+13:42:31 run 209: EXECUTED profit 994.5105 GTB latency 1s
+13:42:35 run 209 recorded: outcome=executed profit=994.510460155079
+13:42:37 run 210: pacing wait 40s (executor cooldown)
+13:44:27 run 210: whale GTB 100000 into pool A tx 0xa76dcf885719.. block 63749700
+13:44:34 run 210: signalled nonce 210 spread 1055bps react 0x35e88e468f78..
+13:44:49 run 210: EXECUTED profit 2422.1655 GTB latency 2s
+13:44:56 run 210 recorded: outcome=executed profit=2422.165543239415
+13:45:08 run 211: whale GTB 100000 into pool B tx 0x4b3868e60916.. block 63750199
+13:45:14 run 211: signalled nonce 211 spread 704bps react 0xfbf6230e42bc..
+13:45:26 run 211: EXECUTED profit 1011.3810 GTB latency 2s
+13:45:38 run 211 recorded: outcome=executed profit=1011.3809795831439
+13:45:40 run 212: pacing wait 32s (executor cooldown)
+13:46:35 run 212: whale GTB 100000 into pool A tx 0x5c2bebb8b0ca.. block 63750589
+13:46:38 run 212: signalled nonce 212 spread 1020bps react 0x6dc44e436c5a..
+13:46:51 run 212: EXECUTED profit 2380.2433 GTB latency 2s
+13:46:57 run 212 recorded: outcome=executed profit=2380.2433424686064
+13:46:58 run 213: pacing wait 31s (executor cooldown)
+13:48:08 run 213: whale GTB 100000 into pool B tx 0xbf3ef37d4b28.. block 63751048
+13:48:14 run 213: signalled nonce 213 spread 698bps react 0xab50e08d44b0..
+13:48:22 run 213: EXECUTED profit 1027.0758 GTB latency 1s
+13:48:26 run 213 recorded: outcome=executed profit=1027.0757977110513
+13:48:27 run 214: pacing wait 33s (executor cooldown)
+13:49:36 run 214: whale GTB 100000 into pool A tx 0x801a4ae794d6.. block 63751408
+13:49:42 run 214: signalled nonce 214 spread 988bps react 0x914a4b60147e..
+13:49:50 run 214: EXECUTED profit 2339.7082 GTB latency 1s
+13:50:03 run 214 recorded: outcome=executed profit=2339.708176711508
+13:50:05 run 215: pacing wait 8s (executor cooldown)
+13:51:05 run 215: whale GTB 100000 into pool B tx 0xb0b3b98c13c8.. block 63751766
+13:51:10 run 215: signalled nonce 215 spread 692bps react 0x538495108b2a..
+13:51:29 run 215: EXECUTED profit 1041.6503 GTB latency 1s
+13:51:36 run 215 recorded: outcome=executed profit=1041.6502606734432
+13:51:56 run 216: whale GTB 100000 into pool A tx 0x67b857a46e46.. block 63752243
+13:52:00 run 216: signalled nonce 216 spread 959bps react 0xd522203ee571..
+13:52:13 run 216: EXECUTED profit 2300.4751 GTB latency 1s
+13:52:17 run 216 recorded: outcome=executed profit=2300.4750993359357
+13:52:19 run 217: pacing wait 41s (executor cooldown)
+13:53:19 run 217: whale GTB 100000 into pool B tx 0x646936c19f6f.. block 63752618
+13:53:37 run 217: signalled nonce 217 spread 686bps react 0x0e80c442396b..
+13:54:02 run 217: EXECUTED profit 1055.1563 GTB latency 1s
+13:54:17 run 217 recorded: outcome=executed profit=1055.1563097177827
+13:54:46 run 218: whale GTB 100000 into pool A tx 0x6af1763b72bd.. block 63752998
+13:54:49 run 218: signalled nonce 218 spread 932bps react 0xf78f5c0d8bb0..
+13:55:33 run 218: EXECUTED profit 2262.4674 GTB latency 1s
+13:55:37 run 218 recorded: outcome=executed profit=2262.4673986581906
+13:55:52 run 219: whale GTB 100000 into pool B tx 0x52c79becdb99.. block 63753420
+13:56:14 run 219: signalled nonce 219 spread 680bps react 0xa83414cb9dad..
+13:56:21 run 219: EXECUTED profit 1067.6428 GTB latency 1s
+13:56:32 run 219 recorded: outcome=executed profit=1067.6428110261384
+13:56:37 run 220: pacing wait 17s (executor cooldown)
+13:57:24 run 220: whale GTB 100000 into pool A tx 0x026196967c54.. block 63753882
+13:57:30 run 220: signalled nonce 220 spread 908bps react 0xd287c5a42464..
+13:57:37 run 220: EXECUTED profit 2225.6154 GTB latency 1s
+13:57:42 run 220 recorded: outcome=executed profit=2225.6153536774855
+13:57:43 run 221: pacing wait 44s (executor cooldown)
+13:58:36 run 221: whale GTB 100000 into pool B tx 0x991ffacde6cf.. block 63754242
+13:58:42 run 221: signalled nonce 221 spread 675bps react 0x814ce081ccd2..
+13:58:51 run 221: EXECUTED profit 1079.1558 GTB latency 1s
+13:58:55 run 221 recorded: outcome=executed profit=1079.1558358405605
+13:58:57 run 222: pacing wait 42s (executor cooldown)
+13:59:55 run 222: whale GTB 100000 into pool A tx 0x7e5fc6a80a00.. block 63754638
+14:00:12 run 222: signalled nonce 222 spread 885bps react 0xfb99fdb91316..
+14:00:21 run 222: EXECUTED profit 2189.8552 GTB latency 1s
+14:00:35 run 222 recorded: outcome=executed profit=2189.8552369697563
+14:00:36 run 223: pacing wait 22s (executor cooldown)
+14:01:11 run 223: whale GTB 100000 into pool B tx 0x6b36278aeb05.. block 63755007
+14:01:14 run 223: signalled nonce 223 spread 669bps react 0xae6a1a104b8d..
+14:01:26 run 223: EXECUTED profit 1089.7389 GTB latency 1s
+14:01:32 run 223 recorded: outcome=executed profit=1089.7389007559386
+14:01:39 run 224: pacing wait 34s (executor cooldown)
+14:02:55 run 224: whale GTB 100000 into pool A tx 0x172f57d065ef.. block 63755363
+14:02:59 run 224: signalled nonce 224 spread 864bps react 0x23646a04bc92..
+14:03:42 run 224: EXECUTED profit 2155.1285 GTB latency 1s
+14:03:48 run 224 recorded: outcome=executed profit=2155.1285071104226
+14:03:58 run 225: whale GTB 100000 into pool B tx 0x9c7c45f2c04b.. block 63755853
+14:04:01 run 225: signalled nonce 225 spread 664bps react 0x7fcf46122d1a..
+14:04:21 run 225: EXECUTED profit 1099.4332 GTB latency 1s
+14:04:33 run 225 recorded: outcome=executed profit=1099.4331757423608
+14:04:38 run 226: pacing wait 24s (executor cooldown)
+14:05:24 run 226: whale GTB 100000 into pool A tx 0xfa73858c71d3.. block 63756281
+14:05:30 run 226: signalled nonce 226 spread 845bps react 0x79682e23cd9e..
+14:05:40 run 226: EXECUTED profit 2121.3811 GTB latency 0s
+14:05:47 run 226 recorded: outcome=executed profit=2121.3811480340064
+14:05:48 run 227: pacing wait 38s (executor cooldown)
+14:06:52 run 227: whale GTB 100000 into pool B tx 0x41ee4fe4fd3a.. block 63756672
+14:06:55 run 227: signalled nonce 227 spread 659bps react 0x794e461d00f2..
+14:07:38 run 227: EXECUTED profit 1108.2777 GTB latency 1s
+14:07:46 run 227 recorded: outcome=executed profit=1108.2776657586398
+14:07:59 run 228: whale GTB 100000 into pool A tx 0x3544a7b68b62.. block 63757047
+14:08:02 run 228: signalled nonce 228 spread 827bps react 0x460089b1c255..
+14:08:09 run 228: EXECUTED profit 2088.5631 GTB latency 1s
+14:08:15 run 228 recorded: outcome=executed profit=2088.5631234819834
+14:08:19 run 229: pacing wait 41s (executor cooldown)
+14:09:18 run 229: whale GTB 100000 into pool B tx 0x54cf05f17aa8.. block 63757453
+14:09:36 run 229: signalled nonce 229 spread 655bps react 0x81b12b787e41..
+14:09:43 run 229: EXECUTED profit 1116.3094 GTB latency 2s
+14:09:47 run 229 recorded: outcome=executed profit=1116.309370547783
+14:09:51 run 230: pacing wait 31s (executor cooldown)
+14:10:31 run 230: whale GTB 100000 into pool A tx 0xeb34ecd19a75.. block 63757819
+14:10:38 run 230: signalled nonce 230 spread 810bps react 0x57012b0a8ab9..
+14:11:10 run 230: EXECUTED profit 2056.6279 GTB latency 1s
+14:11:23 run 230 recorded: outcome=executed profit=2056.627922462996
+14:11:31 run 231: pacing wait 4s (executor cooldown)
+14:11:47 run 231: whale GTB 100000 into pool B tx 0x919abea8c1b2.. block 63758196
+14:11:53 run 231: signalled nonce 231 spread 650bps react 0x34973eea3c70..
+14:12:05 run 231: EXECUTED profit 1123.5634 GTB latency 0s
+14:12:10 run 231 recorded: outcome=executed profit=1123.563426244827
+14:12:14 run 232: pacing wait 35s (executor cooldown)
+14:12:59 run 232: whale GTB 100000 into pool A tx 0x1b9cc1dc67ff.. block 63758559
+14:13:03 run 232: signalled nonce 232 spread 795bps react 0x1d19edae9a83..
+14:13:12 run 232: EXECUTED profit 2025.5322 GTB latency 1s
+14:13:17 run 232 recorded: outcome=executed profit=2025.5321773394987
+14:13:19 run 233: pacing wait 44s (executor cooldown)
+14:14:21 run 233: whale GTB 100000 into pool B tx 0x756a919570b3.. block 63758957
+14:14:24 run 233: signalled nonce 233 spread 646bps react 0xcaab2593089c..
+14:14:36 run 233: EXECUTED profit 1130.0732 GTB latency 2s
+14:15:01 run 233 recorded: outcome=executed profit=1130.0732316943017
+14:15:05 run 234: pacing wait 19s (executor cooldown)
+14:15:34 run 234: whale GTB 100000 into pool A tx 0xea2bd1cd4302.. block 63759332
+14:15:40 run 234: signalled nonce 234 spread 781bps react 0xc00c6861d1ea..
+14:15:52 run 234: EXECUTED profit 1995.2353 GTB latency 1s
+14:15:57 run 234 recorded: outcome=executed profit=1995.235340365925
+14:15:59 run 235: pacing wait 39s (executor cooldown)
+14:17:03 run 235: whale GTB 100000 into pool B tx 0xe6b9892d1b9b.. block 63759693
+14:17:07 run 235: signalled nonce 235 spread 641bps react 0x626555566d80..
+14:17:15 run 235: EXECUTED profit 1135.8706 GTB latency 1s
+14:17:19 run 235 recorded: outcome=executed profit=1135.8705618095053
+14:17:23 run 236: pacing wait 26s (executor cooldown)
+14:17:58 run 236: whale GTB 100000 into pool A tx 0x9d70ab741034.. block 63760053
+14:18:05 run 236: signalled nonce 236 spread 767bps react 0x7be009744c25..
+14:18:19 run 236: EXECUTED profit 1965.6994 GTB latency 1s
+14:18:26 run 236 recorded: outcome=executed profit=1965.6994076520537
+14:18:28 run 237: pacing wait 34s (executor cooldown)
+14:19:23 run 237: whale GTB 100000 into pool B tx 0xec26751b712a.. block 63760465
+14:19:29 run 237: signalled nonce 237 spread 637bps react 0xfdfcf2a2f74a..
+14:19:36 run 237: EXECUTED profit 1140.9857 GTB latency 1s
+14:19:43 run 237 recorded: outcome=executed profit=1140.985669866287
+14:19:44 run 238: pacing wait 39s (executor cooldown)
+14:20:33 run 238: whale GTB 100000 into pool A tx 0x82b7f06cae3a.. block 63760828
+14:20:36 run 238: signalled nonce 238 spread 754bps react 0x14df65b16c62..
+14:20:50 run 238: EXECUTED profit 1936.8887 GTB latency 1s
+14:20:55 run 238 recorded: outcome=executed profit=1936.888681902039
+14:20:57 run 239: pacing wait 39s (executor cooldown)
+14:22:05 run 239: whale GTB 100000 into pool B tx 0x81965e3e0b18.. block 63761195
+14:22:10 run 239: signalled nonce 239 spread 633bps react 0xad92f98a65b0..
+14:22:37 run 239: EXECUTED profit 1145.4474 GTB latency 2s
+14:22:42 run 239 recorded: outcome=executed profit=1145.4473802793475
+14:22:44 run 240: pacing wait 7s (executor cooldown)
+14:23:09 run 240: whale GTB 100000 into pool A tx 0xd26f07d5ec85.. block 63761583
+14:23:16 run 240: signalled nonce 240 spread 743bps react 0x87305998c22c..
+14:23:30 run 240: EXECUTED profit 1908.7696 GTB latency 1s
+14:23:35 run 240 recorded: outcome=executed profit=1908.7695670900027
+14:23:46 run 241: pacing wait 22s (executor cooldown)
+14:24:20 run 241: whale GTB 100000 into pool B tx 0x0090c6c3f46b.. block 63761955
+14:24:23 run 241: signalled nonce 241 spread 629bps react 0x621a159f70cc..
+14:24:30 run 241: EXECUTED profit 1149.2832 GTB latency 2s
+14:24:43 run 241 recorded: outcome=executed profit=1149.2831731365209
+14:24:45 run 242: pacing wait 38s (executor cooldown)
+14:25:33 run 242: whale GTB 100000 into pool A tx 0x174609dbb0ce.. block 63762316
+14:25:35 run 242: signalled nonce 242 spread 731bps react 0xb5c05b6332c8..
+14:25:52 run 242: EXECUTED profit 1881.3104 GTB latency 1s
+14:25:56 run 242 recorded: outcome=executed profit=1881.310389623827
+14:25:58 run 243: pacing wait 36s (executor cooldown)
+14:26:50 run 243: whale GTB 100000 into pool B tx 0xd9c2e28bba94.. block 63762702
+14:26:56 run 243: signalled nonce 243 spread 626bps react 0x92f1ccf5b6d2..
+14:27:04 run 243: EXECUTED profit 1152.5193 GTB latency 1s
+14:27:26 run 243 recorded: outcome=executed profit=1152.5192615494188
+14:27:28 run 244: pacing wait 23s (executor cooldown)
+14:28:05 run 244: whale GTB 100000 into pool A tx 0xcf564cd643e5.. block 63763074
+14:28:11 run 244: signalled nonce 244 spread 721bps react 0xc0fc2f3aac4a..
+14:28:18 run 244: EXECUTED profit 1854.4812 GTB latency 1s
+14:28:24 run 244 recorded: outcome=executed profit=1854.4812416256727
+14:28:26 run 245: pacing wait 40s (executor cooldown)
+14:29:16 run 245: whale GTB 100000 into pool B tx 0xd73b94893bae.. block 63763433
+14:29:19 run 245: signalled nonce 245 spread 622bps react 0x1947e3b795f7..
+14:29:32 run 245: EXECUTED profit 1155.1807 GTB latency 2s
+14:29:44 run 245 recorded: outcome=executed profit=1155.1806627045944
+14:29:46 run 246: pacing wait 33s (executor cooldown)
+14:30:45 run 246: whale GTB 100000 into pool A tx 0xa5638b503b47.. block 63763804
+14:30:52 run 246: signalled nonce 246 spread 711bps react 0x573c2d88c6cd..
+14:31:41 run 246: EXECUTED profit 1828.2538 GTB latency 1s
+14:31:46 run 246 recorded: outcome=executed profit=1828.2538427979493
+14:32:01 run 247: whale GTB 100000 into pool B tx 0x25f591e59704.. block 63764269
+14:32:08 run 247: signalled nonce 247 spread 618bps react 0x0507144d3ca4..
+14:32:47 run 247: EXECUTED profit 1157.2913 GTB latency 2s

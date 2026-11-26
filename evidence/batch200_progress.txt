@@ -1,0 +1,14 @@
+target_total: 300
+completed_total: 300
+last_run: 300
+last_outcome: executed
+last_profit_gtb: 1726.3208411412495
+total_profit_gtb: 950523.884698
+rsc_lreact: 10.444993
+wallet_lreact: 0.194320
+executor_eth: 0.002492
+wallet_base_sepolia_eth: 0.021570
+lreact_burn_per_run: 0.044831
+projected_final_total: 537
+status: running
+updated: 2026-11-26T11:21:03Z

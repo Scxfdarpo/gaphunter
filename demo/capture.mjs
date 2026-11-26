@@ -3,7 +3,7 @@
 import puppeteer from 'puppeteer';
 import { mkdirSync } from 'node:fs';
 
-const FPS = 8, DUR = 84, OUT = '/tmp/ghframes';
+const FPS = 8, DUR = 120, OUT = '/tmp/ghframes';
 mkdirSync(OUT, { recursive: true });
 const browser = await puppeteer.launch({ args: ['--no-sandbox', '--force-color-profile=srgb'] });
 const page = await browser.newPage();

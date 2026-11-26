@@ -1,0 +1,88 @@
+starting: 3 runs already recorded, plan ['A', 'B', 'A', 'B', 'A', 'B', 'A', 'B', 'A', 'B', 'A', 'B', 'A', 'B', 'A', 'B', 'A']
+run 4: whale 100,000 token1 (GTA) into pair A 0x633ECDA3DFDE4e508Be2c2807117B5Bc868019C3
+    send retry 1: 
+  whale tx 0x205bfcbc3ed7b2ca997dfe9c89eaa53944dc5abe714573db1c8be5cb28c334a8 block 68836710 ts 1795689138
+  executed: nonce 4 react 0xddd58700ffa0970e41b086420e1affcf8b35d5c181be650aa5d55d3f40b6cb7a callback 0xee0a01f0e1fe93d997f81a9e7cdff5b4dc833c6c46748046421a95ef67f25641 latency 2 s / 2 blocks profit 749.9930741344791 GTA
+  cooling down 68 s
+run 5: whale 100,000 token1 (GTA) into pair B 0x8e62F00356C75791570182bB1A412BC4129f387a
+    send retry 1: 
+  whale tx 0x282cae254ef7adafb92f9bcedc022c26eb039b35fde9c4042d14c2972593ff2a block 68836804 ts 1795689232
+  executed: nonce 5 react 0x2a34ce572f46fd459ef49fa6ebf65cf409455c7b718e08e3d239bd788ab16ad6 callback 0xabc11b227a7afdd267eeba4a9363ec2c913c7922b3514df5c312db807708ef7f latency 2 s / 2 blocks profit 2941.4893675730236 GTA
+  cooling down 68 s
+run 6: whale 100,000 token1 (GTA) into pair A 0x633ECDA3DFDE4e508Be2c2807117B5Bc868019C3
+    send retry 1: 
+    send retry 1: 
+  whale tx 0x3c68caac64252dfd0edbee6665a36425ad4d21faff82e93e74e83a9028e7f267 block 68836900 ts 1795689328
+  executed: nonce 6 react 0x3c8a4ff1b7154b39292515db5d2e0531fb8af50919156f508a630420b4508a6f callback 0x0bc01845c46c2cba9edfc7e1f258934165d9ab45d283d864ddd2dff2853dbfb2 latency 2 s / 2 blocks profit 783.0697873696666 GTA
+  cooling down 69 s
+run 7: whale 100,000 token1 (GTA) into pair B 0x8e62F00356C75791570182bB1A412BC4129f387a
+  whale tx 0x38c58fe891a4385c79bacedc1123386919dda24d696fa15184453307060c22d8 block 68836990 ts 1795689418
+  executed: nonce 7 react 0x4fce506fc7e40aff02105aa86c6781cf1025431604e463efae7bfefd76088e54 callback 0x409dd5c3fa4b0e9cc26f2ed39f505d5b13a6748b160f290c4fe7e403e40db24e latency 3 s / 3 blocks profit 2876.9605108031255 GTA
+  cooling down 70 s
+run 8: whale 100,000 token1 (GTA) into pair A 0x633ECDA3DFDE4e508Be2c2807117B5Bc868019C3
+    send retry 1: 
+  whale tx 0x3cb9d80d49bff471da884cb4b8b1178719f9e7157f547b8cd7ca130b4249b402 block 68837086 ts 1795689514
+  executed: nonce 8 react 0xc9e0dacf4fef7f063637ae401822fdaf8a88e9f2d8f45bffe839a39234487dfc callback 0xa71a23caac407975fd0b536bb0dbbb68b8c87ba8e4759ec8221152269e04245a latency 2 s / 2 blocks profit 814.0316182223755 GTA
+  cooling down 70 s
+run 9: whale 100,000 token1 (GTA) into pair B 0x8e62F00356C75791570182bB1A412BC4129f387a
+    send retry 1: 
+  whale tx 0x09a954b86f78b50691dcd6462ab1d328ab8c1bc658e8c9a43d7492996aff3f08 block 68837179 ts 1795689607
+  executed: nonce 9 react 0x7e3157460adce9a033f292a6ff4b839eaaaca13015dee0bd326a2037c4037868 callback 0x0d4ce1cd02dd4a152a19761cc7968433da0fdadf1cde074fe57f361bb379866d latency 2 s / 2 blocks profit 2815.9396159148127 GTA
+  cooling down 68 s
+run 10: whale 100,000 token1 (GTA) into pair A 0x633ECDA3DFDE4e508Be2c2807117B5Bc868019C3
+    send retry 1: 
+starting: 9 runs already recorded, plan ['A', 'B', 'A', 'B', 'A', 'B', 'A', 'B', 'A', 'B', 'A']
+run 10: whale 100,000 token1 (GTA) into pair A 0x633ECDA3DFDE4e508Be2c2807117B5Bc868019C3
+    send retry 1: 
+  whale tx 0x04d092a7a0e8dc0f6e148ee4d6a656fa140ed09df778eaa98a07a6e859fb12db block 68837330 ts 1795689758
+  executed: nonce 10 react 0x30b13a231cf7e0367de74b69632fe1dfc4dc46d612d19f82377ea0b1a98864c8 callback 0x740ff4764fb94d7fef1d5762e3fc1de1f719c16e44f379aea3dac17b4964f161 latency 2 s / 2 blocks profit 843.018955958186 GTA
+  cooling down 68 s
+run 11: whale 100,000 token1 (GTA) into pair B 0x8e62F00356C75791570182bB1A412BC4129f387a
+    send retry 1: 
+  whale tx 0xf1fab57894d2d0f49637c188e55fc5a250f5578e4ff49466e1819eb0476d66a5 block 68837423 ts 1795689851
+  executed: nonce 11 react 0x429494fbf5eddb84c74f4f64180bc13fb4c4148ce8b54368781ec2871ae36db3 callback 0xa82a0845eee5a425840e506726fc153c68527eaac9ebcbe5e45d5c0b0c00dc49 latency 2 s / 2 blocks profit 2757.993468892075 GTA
+  cooling down 68 s
+run 12: whale 100,000 token1 (GTA) into pair A 0x633ECDA3DFDE4e508Be2c2807117B5Bc868019C3
+  whale tx 0xe9a4a3f312c77adfc3322adfd72cad25f29e793d3efb0714afdbe96a85381814 block 68837512 ts 1795689940
+  executed: nonce 12 react 0x0d905ff6a4fdd0b01a6560f1bc9c85e5cfad48736cd11518e6df61cf5aa433c1 callback 0x3460501d6c13b42dfd0f1b16930e94c5780e00e69db66b4a8d13c57217f03d53 latency 2 s / 2 blocks profit 870.1548314695309 GTA
+  cooling down 68 s
+run 13: whale 100,000 token1 (GTA) into pair B 0x8e62F00356C75791570182bB1A412BC4129f387a
+    send retry 1: 
+  whale tx 0x497a14f77f1d848940570289fd65be6090b7d514440b63f67f9c4583cc53890a block 68837604 ts 1795690032
+  executed: nonce 13 react 0xb7dd0a8f71045e90716161fbd7d64be3e8c32de1a7d36af316b6c47bc69299a1 callback 0xd300f97524c9f519ef59294ec3cfde6952f56c0901796115188e69fffaa855ea latency 2 s / 2 blocks profit 2702.7801703752248 GTA
+  cooling down 68 s
+run 14: whale 100,000 token1 (GTA) into pair A 0x633ECDA3DFDE4e508Be2c2807117B5Bc868019C3
+    send retry 1: 
+  whale tx 0x9af45f83a1b458902c002f843a4ecb5b0c7bb99091459301bca8cfec5fb3cd66 block 68837698 ts 1795690126
+  executed: nonce 14 react 0x8f177bd6748bb6c7c0d8f2631858387d2ab66f2a009f7974c6b15b32effc1b2c callback 0x177790db61dce8a6865e19f5432280ee7ef60e17a912ce4a1f114920f1829feb latency 2 s / 2 blocks profit 895.5485774421337 GTA
+  cooling down 68 s
+run 15: whale 100,000 token1 (GTA) into pair B 0x8e62F00356C75791570182bB1A412BC4129f387a
+    send retry 1: 
+  whale tx 0xb538f3fe792666388c5a18f7a34afb07c085f30108aee29bf87391ccc724ded8 block 68837790 ts 1795690218
+  executed: nonce 15 react 0x309c5d58b787d0a153e71ed301f0cc661d219dd392847055d1e17a1dcb877c21 callback 0x00e5b30f5ed319d4de40e202234824bdbcea9c921701334337b6e4e344eeb6c0 latency 3 s / 3 blocks profit 2650.023749006954 GTA
+  cooling down 69 s
+run 16: whale 100,000 token1 (GTA) into pair A 0x633ECDA3DFDE4e508Be2c2807117B5Bc868019C3
+    send retry 1: 
+  whale tx 0x705f9df2981823d9540bd719059736052c326ef4cec764730807e2e9cb8473df block 68837884 ts 1795690312
+  executed: nonce 16 react 0x34bae7d95b45a95b389f6c0a712ae2ac099bcedf86c5a7f6551fb141d9ca206f callback 0x36cbdd5216314d739f2dab35d9b13fde685e2fc88ff6281574f687e1e0c9d3e7 latency 2 s / 2 blocks profit 919.2984692955955 GTA
+  cooling down 69 s
+run 17: whale 100,000 token1 (GTA) into pair B 0x8e62F00356C75791570182bB1A412BC4129f387a
+    send retry 1: 
+  whale tx 0xae1190b1c38b66a5fd212222c7f3445357030c02309afd0ae0fb46df4ef39acd block 68837978 ts 1795690406
+  executed: nonce 17 react 0x1d78e1119079049ea73048f01f180706052a182e6ffcfb2974db75ecc26d2373 callback 0x34b5c2ab5a2da284d9699cc54fa067f25744c42d66dbd0fb0b714d15f673cd88 latency 2 s / 2 blocks profit 2599.4970029408437 GTA
+  cooling down 68 s
+run 18: whale 100,000 token1 (GTA) into pair A 0x633ECDA3DFDE4e508Be2c2807117B5Bc868019C3
+    send retry 1: 
+  whale tx 0xacadeb324b925b6aaa57c0a3ca3f2e31c619ddb49579ceea1dd86ce6e3fd9b37 block 68838071 ts 1795690499
+  executed: nonce 18 react 0x0b329926fa7cc317e8fa815e43399166c2a578e9cebde1be294c0bd27906bfd9 callback 0xfd60845bd4f9364d4f5097c63bc4a8947c34588868c38f629ee1401b19d114fa latency 2 s / 2 blocks profit 941.4936779460423 GTA
+  cooling down 68 s
+run 19: whale 100,000 token1 (GTA) into pair B 0x8e62F00356C75791570182bB1A412BC4129f387a
+    send retry 1: 
+  whale tx 0x329496f535df37bee589a2b799a14c4150454ef402caf96e9bc72f26e6ee72de block 68838165 ts 1795690593
+  executed: nonce 19 react 0x43c8c8dbb97d01a2878dd28e9f6db328e8835a33d2d96d3e6ba09f044341f9d2 callback 0x83147058f9937787408e8b2e84fe57848d6691567e2ff3dc7cc839f3f2ef2c02 latency 3 s / 3 blocks profit 2551.0095978154814 GTA
+  cooling down 69 s
+run 20: whale 100,000 token1 (GTA) into pair A 0x633ECDA3DFDE4e508Be2c2807117B5Bc868019C3
+    send retry 1: 
+  whale tx 0x550a29624377505ba5617e1dc75b9bc45a4e02bde1296d82b93928e1f20299c6 block 68838259 ts 1795690687
+  executed: nonce 20 react 0x5f606301ce8572f37f47adfad50371a9b751d3b7294bbbe8fa4cd6707e54295e callback 0x391d75dfc3b9280619f0603fb4d315fe7c7cd027c6f0f41f767d145beeb5b7e5 latency 3 s / 3 blocks profit 962.215745629221 GTA
+DONE {"runs": 20, "executed": 20, "totalProfitToken1": 36482.76099275689}

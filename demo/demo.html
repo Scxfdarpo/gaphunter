@@ -38,28 +38,30 @@
   .step p { font-size:17px; color:#9fb3c8; line-height:1.4; }
   .step.lit { border-color:#22d3ee; box-shadow:0 0 0 1px #22d3ee, 0 0 34px rgba(34,211,238,.25); }
   .step.litg { border-color:#34d399; box-shadow:0 0 0 1px #34d399, 0 0 34px rgba(52,211,153,.22); }
+  .bigstat { font-size:44px; font-weight:800; }
 </style>
 </head>
 <body>
 
 <!-- Scene 1: title -->
 <div class="scene" id="s1">
-  <div style="margin-top:120px">
+  <div style="margin-top:110px">
     <div class="kicker">Reactive Omni Buildathon · Every Second Counts</div>
     <h1>GapHunter</h1>
     <div class="sub" style="margin-top:22px; font-size:30px;">Cross-venue arbitrage where <span class="accent"><b>the contract is the bot</b></span> —<br>no keeper, no cron, no off-chain anything.</div>
+    <div class="sub" style="margin-top:26px; font-size:26px;"><span class="green"><b>320 live loops</b></span> on two chains. <span class="green"><b>320 executed.</b></span> Zero refused, zero failed.</div>
   </div>
-  <div class="caption">Two Uniswap V2 venues on Base Sepolia drift apart. A reactive contract on Lasna watches both — and closes the gap itself, in about a second.</div>
+  <div class="caption">Two Uniswap V2 venues drift apart. A reactive contract on Lasna watches both — and closes the gap itself, in about a second.</div>
 </div>
 
 <!-- Scene 2: architecture -->
 <div class="scene" id="s2">
   <div class="kicker">How it works</div>
-  <h2>Lasna sits in the middle</h2>
+  <h2>Lasna sits in the middle — of two chains</h2>
   <div class="flowrow" style="margin-top:26px">
-    <div class="step"><div class="n">BASE SEPOLIA</div><h4>Two V2 venues</h4><p>Same GTA/GTB pair, two factories, 1,000,000 / 1,000,000 seeded in each pool.</p></div>
-    <div class="step"><div class="n">REACTIVE · LASNA</div><h4>GapHunterReactive</h4><p>Subscribed to both pools' <span class="mono">Sync</span> events. Reprices on every event, checks the spread against a 1.5% threshold, sizes the trade from live depth, estimates profit <i>before</i> signalling.</p></div>
-    <div class="step"><div class="n">BASE SEPOLIA</div><h4>GapHunterExecutor</h4><p>Receives the callback, re-verifies profitability against live reserves, buys cheap, sells expensive, keeps the spread.</p></div>
+    <div class="step"><div class="n">BASE SEPOLIA + UNICHAIN SEPOLIA</div><h4>Two V2 venues per chain</h4><p>Same GTA/GTB pair, two factories, 1,000,000 / 1,000,000 seeded in each pool — deployed identically on both origin chains.</p></div>
+    <div class="step"><div class="n">REACTIVE · LASNA</div><h4>GapHunterReactive ×2</h4><p>One reactive contract per origin chain, subscribed to both pools' <span class="mono">Sync</span> events. Reprices on every event, checks the spread against a 1.5% threshold, sizes the trade from live depth, estimates profit <i>before</i> signalling.</p></div>
+    <div class="step"><div class="n">ORIGIN CHAIN</div><h4>GapHunterExecutor ×2</h4><p>Receives the callback, re-verifies profitability against live reserves, buys cheap, sells expensive, keeps the spread. Reverts if the gap is gone.</p></div>
   </div>
   <div class="caption">Classic keeper bots poll off-chain and race on gas. GapHunter removes the bot entirely: <b>the price event itself triggers the trade</b>, through Reactive callbacks.</div>
 </div>
@@ -69,51 +71,69 @@
   <div class="kicker">Live run · real testnet transactions</div>
   <h2 style="margin-bottom:10px">A whale moves one venue. The gap closes itself.</h2>
   <div id="chartWrap">
-    <canvas id="chart" width="1110" height="252"></canvas>
+    <canvas id="chart" width="1110" height="216"></canvas>
     <div class="legend"><span class="dot" style="background:#22d3ee"></span>Venue A price (GTB per GTA)<span class="dot" style="background:#fbbf24"></span>Venue B price<span style="float:right" class="mono" id="gapLabel"></span></div>
   </div>
-  <div class="flowrow" style="margin-top:16px">
+  <div class="flowrow" style="margin-top:12px">
     <div class="step" id="st1"><div class="n">STEP 1 · ORIGIN EVENT</div><h4>Whale swap on venue B</h4><p class="hash">0x65ba04…eb72254</p><p>100,000 GTB in — venue B jumps ~10%.</p></div>
     <div class="step" id="st2"><div class="n">STEP 2 · LASNA REACTS</div><h4>Spread check passes</h4><p>The <span class="mono">Sync</span> event reaches Lasna; the RSC reprices both pools and requests a callback.</p></div>
-    <div class="step" id="st3"><div class="n">STEP 3 · CALLBACK EXECUTES</div><h4>Arbitrage settles</h4><p class="hash">0x81d330…f764ffc</p><p>Executor balance: <b class="green mono" id="balLabel">500,000 GTB</b></p></div>
+    <div class="step" id="st3"><div class="n">STEP 3 · CALLBACK EXECUTES</div><h4>Arbitrage settles</h4><p class="hash">0x81d330…f764ffc</p><p>Executor balance: <b class="green mono" id="balLabel">503,041.01 GTB</b></p></div>
   </div>
-  <div class="caption">Everything after the whale swap is on-chain and automatic. <b>No transaction of ours touches the executor</b> — the callback is the only caller.</div>
+  <div class="caption">This is run 2 of 320 — everything after the whale swap is on-chain and automatic. <b>No transaction of ours touches the executor</b> — the callback is the only caller.</div>
 </div>
 
-<!-- Scene 4: evidence -->
+<!-- Scene 4: final evidence -->
 <div class="scene" id="s4">
-  <div class="kicker">Measured on-chain</div>
-  <h2>Two runs. About a second each.</h2>
-  <table style="margin-top:16px">
-    <tr><th>Run</th><th>Origin → callback</th><th>Blocks</th><th>Executor profit</th><th></th></tr>
-    <tr><td>Run 1</td><td class="mono">1795520899 → 1795520900</td><td>7</td><td class="green mono">+3,041.01 GTB</td><td><span class="pill g">SETTLED</span></td></tr>
-    <tr><td>Run 2</td><td class="mono">1795521043 → 1795521044</td><td>7</td><td class="green mono">+5,428.67 GTB</td><td><span class="pill g">SETTLED</span></td></tr>
+  <div class="kicker">Final evidence · measured on-chain</div>
+  <h2>320 loops. Every one settled at a profit.</h2>
+  <table style="margin-top:14px">
+    <tr><th>Leg</th><th>Runs</th><th>Executed</th><th>Latency p50 / p95</th><th>Profit (on-chain counter)</th></tr>
+    <tr><td>Base Sepolia</td><td class="mono">300</td><td class="mono">300 · 0 refused</td><td class="mono">1 s / 2 s</td><td class="green mono">+952,227.72 GTB</td></tr>
+    <tr><td>Unichain Sepolia</td><td class="mono">20</td><td class="mono">20 · 0 refused</td><td class="mono">2 s / 3 s</td><td class="green mono">+36,482.76 GTA</td></tr>
   </table>
-  <div style="margin-top:26px; font-size:23px; color:#9fb3c8; line-height:1.5;">Executor inventory: 500,000 → <span class="green"><b>508,469.68 GTB</b></span>. Latency is measured in block timestamps: origin <span class="mono">Sync</span> block → callback execution block, Base Sepolia.</div>
-  <div class="caption">Timestamps and hashes are taken from the chains themselves — <b>every figure in this video is verifiable</b> in the README's evidence table.</div>
+  <div style="margin-top:24px; font-size:22px; color:#9fb3c8; line-height:1.55;">
+    Base executor: 500,000 → <span class="green"><b>1,452,227.72 GTB</b></span> — its own <span class="mono">totalProfit</span> counter matches the run ledger
+    (plus one restart-window execution, documented in the README). Unichain reconciles to the wei.
+    A 2-second polling keeper watching runs 3–50 <span class="amber"><b>missed 5 of 48 gaps entirely</b></span> — the loop had already closed them.
+  </div>
+  <div class="caption">Every figure is verifiable: per-run hashes in <b>evidence/runs.json</b> and <b>evidence/unichain-runs.json</b>, counters readable on-chain right now.</div>
 </div>
 
-<!-- Scene 5: close -->
+<!-- Scene 5: craft -->
 <div class="scene" id="s5">
-  <div style="margin-top:64px">
+  <div class="kicker">Craft</div>
+  <h2>Built like it has to survive contact</h2>
+  <div class="flowrow" style="margin-top:24px">
+    <div class="step"><div class="n">TESTS</div><h4>17 / 17 passing</h4><p>Full-loop Foundry suite against real constant-product pools, plus 12 guard tests: threshold, cooldown, sizing, min-profit, replay, live-reprice revert.</p></div>
+    <div class="step"><div class="n">VERIFIED SOURCE</div><h4>Sourcify exact match</h4><p>Both Base-leg contracts recompiled by Sourcify and matched to the deployed bytecode bit-for-bit, metadata hash included.</p></div>
+    <div class="step"><div class="n">LIVE DASHBOARD</div><h4>Reads the chain directly</h4><p><span class="mono" style="font-size:15.5px">scxfdarpo.github.io/gaphunter</span> — reserves, spreads, executor counters and the run ledger, straight from RPC. No backend.</p></div>
+  </div>
+  <div class="caption">And an honest limitation, in the README: a 3,000-sample scan of Base mainnet found <b>zero</b> net-profitable gaps after fees — this proves the pattern, not a mainnet edge.</div>
+</div>
+
+<!-- Scene 6: close -->
+<div class="scene" id="s6">
+  <div style="margin-top:56px">
     <div class="kicker">GapHunter · Reactive Omni Buildathon</div>
     <h2 style="font-size:46px;">The contract is the bot.</h2>
-    <div class="sub" style="margin-top:20px; line-height:1.6;">
-      Reactive (Lasna): <span class="hash">0x33BB7940…e54B3222</span><br>
+    <div class="sub" style="margin-top:20px; line-height:1.6; font-size:23px;">
+      Reactive (Lasna, Base leg): <span class="hash">0x33BB7940…e54B3222</span><br>
+      Reactive (Lasna, Unichain leg): <span class="hash">0xD6a779b9…e0579aA20</span><br>
       Executor (Base Sepolia): <span class="hash">0x98624912…Db6d30bF63</span><br>
-      Public repo, full-loop Foundry tests (5/5), reproducible deploy scripts.
+      Executor (Unichain Sepolia): <span class="hash">0xBD1E7890…7778CE5C53</span><br>
+      Public repo · 17 tests · Sourcify-verified · live dashboard.
     </div>
-    <div style="margin-top:30px;"><span class="pill a">EVERY SECOND COUNTS</span> <span class="pill g">LIVE ON TESTNET</span></div>
+    <div style="margin-top:30px;"><span class="pill a">EVERY SECOND COUNTS</span> <span class="pill g">LIVE ON TWO TESTNETS</span></div>
   </div>
   <div class="caption">Built during the event window for the Reactive Omni Buildathon. Track: <b>Every Second Counts</b>.</div>
 </div>
 
 <script>
-// Deterministic timeline: total 84s. Scenes: [start, end)
-const SCENES = [ [0,9,'s1'], [9,25,'s2'], [25,55,'s3'], [55,71,'s4'], [71,84,'s5'] ];
+// Deterministic timeline: total 120s. Scenes: [start, end)
+const SCENES = [ [0,10,'s1'], [10,28,'s2'], [28,58,'s3'], [58,86,'s4'], [86,104,'s5'], [104,120,'s6'] ];
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const ease=t=>t<0?0:t>1?1:t*t*(3-2*t);
-// Venue prices over scene-3 local time u in [0,30): A ~1.00 flat (tiny poke dip), B jumps at u=6, converges after arb at u=16
+// Venue prices over scene-3 local time u in [0,30): A ~1.00 flat, B jumps at u=6, converges after arb at u=16
 function priceA(u){ return 1.0 + 0.004*Math.sin(u*0.7)*Math.exp(-u*0.05); }
 function priceB(u){
   if(u<6) return 1.0 + 0.003*Math.sin(u*0.9+1);
@@ -142,14 +162,14 @@ window.__seek=function(T){
     if(T>=a&&T<b) o=Math.min(ease((T-a)/0.7), ease((b-T)/0.7));
     el.style.opacity=o;
   }
-  if(T>=25&&T<55){
-    const u=T-25; drawChart(u);
+  if(T>=28&&T<58){
+    const u=T-28; drawChart(u);
     document.getElementById('st1').className='step'+(u>=6?' lit':'');
     document.getElementById('st2').className='step'+(u>=9.5?' lit':'');
     const done=u>=16;
     document.getElementById('st3').className='step'+(done?' litg':'');
-    let bal=500000;
-    if(u>=16){ const k=ease((u-16)/2.5); bal=500000 + (3041.01+5428.67)*k; }
+    let bal=503041.01;
+    if(u>=16){ const k=ease((u-16)/2.5); bal=503041.01 + 5428.67*k; }
     document.getElementById('balLabel').textContent=fmt(bal)+' GTB';
   }
 };

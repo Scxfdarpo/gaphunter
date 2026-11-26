@@ -1,0 +1,213 @@
+15:32:51 resuming; already recorded: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160]
+15:32:53 minted 3,000,000 GTB to wallet
+15:33:13 run 105: whale GTB 100000 into pool B tx 0x48eaf2502138.. block 63494627
+15:33:16 run 105: signalled nonce 159 spread 3184bps react 0xa8a472fff273..
+15:33:23 run 105: EXECUTED profit 18093.3716 GTB latency 1s
+15:33:26 run 105 recorded: outcome=executed profit=18093.371639736477
+15:33:28 run 129: pacing wait 48s (executor cooldown)
+15:35:00 run 129: whale GTB 100000 into pool B tx 0x3b4b3a7ad1cb.. block 63494983
+15:35:03 run 129: signalled nonce 160 spread 2743bps react 0x29d71989ae30..
+15:35:14 run 129: EXECUTED profit 15465.4355 GTB latency 1s
+15:35:25 run 129 recorded: outcome=executed profit=15465.435519447587
+15:35:26 run 161: pacing wait 1s (executor cooldown)
+15:35:44 run 161: whale GTB 100000 into pool B tx 0x801c9fe2786e.. block 63495372
+15:35:47 run 161: signalled nonce 161 spread 2324bps react 0xba2dae5828d0..
+15:35:54 run 161: EXECUTED profit 12875.3792 GTB latency 1s
+15:36:10 run 161 recorded: outcome=executed profit=12875.379229581546
+15:36:12 run 162: pacing wait 34s (executor cooldown)
+15:36:55 run 162: whale GTA 100000 into pool B tx 0xca8e3b682f7a.. block 63495727
+15:36:58 run 162: signalled nonce 162 spread 6999bps react 0x23bbc25ae0df..
+15:37:40 run 162: EXECUTED profit 35332.4315 GTB latency 1s
+15:38:02 run 162 recorded: outcome=executed profit=35332.43152130264
+15:38:24 run 163: whale GTA 100000 into pool A tx 0x4a279a79f802.. block 63496181
+15:38:29 run 163: signalled nonce 163 spread 1836bps react 0xdedc31c2dc27..
+15:39:00 run 163: EXECUTED profit 6971.3570 GTB latency 1s
+15:39:04 run 163 recorded: outcome=executed profit=6971.3569836670185
+15:39:06 run 164: pacing wait 22s (executor cooldown)
+15:39:41 run 164: whale GTA 100000 into pool B tx 0x026c3165e4aa.. block 63496537
+15:39:43 run 164: signalled nonce 164 spread 5008bps react 0xc82f3c2ccae2..
+15:39:56 run 164: EXECUTED profit 19203.5626 GTB latency 1s
+15:40:00 run 164 recorded: outcome=executed profit=19203.562578592675
+15:40:04 run 165: pacing wait 35s (executor cooldown)
+15:40:57 run 165: whale GTA 100000 into pool A tx 0xdfc9f1a852b8.. block 63496894
+15:41:01 run 165: signalled nonce 165 spread 1565bps react 0x8432f62e335b..
+15:41:10 run 165: EXECUTED profit 4419.1619 GTB latency 2s
+15:41:14 run 165 recorded: outcome=executed profit=4419.161901065461
+15:41:16 run 166: pacing wait 35s (executor cooldown)
+15:42:00 run 166: whale GTA 100000 into pool B tx 0xfd5e9b43364d.. block 63497259
+15:42:03 run 166: signalled nonce 166 spread 3914bps react 0x4fff78f58c1c..
+15:42:24 run 166: EXECUTED profit 11969.8370 GTB latency 1s
+15:42:39 run 166 recorded: outcome=executed profit=11969.837039314718
+15:42:45 run 167: pacing wait 18s (executor cooldown)
+15:43:12 run 167: whale GTA 100000 into pool A tx 0x8a9824f0c5bb.. block 63497624
+15:43:19 run 167: signalled nonce 167 spread 1392bps react 0x952db0e7df72..
+15:43:28 run 167: EXECUTED profit 3077.5565 GTB latency 2s
+15:43:39 run 167 recorded: outcome=executed profit=3077.5564650799934
+15:43:41 run 168: pacing wait 36s (executor cooldown)
+15:44:26 run 168: whale GTB 100000 into pool A tx 0x1d8515d21f6c.. block 63497992
+15:44:32 run 168: signalled nonce 168 spread 607bps react 0xd5e431f90c0e..
+15:44:41 run 168: EXECUTED profit 491.8795 GTB latency 1s
+15:44:45 run 168 recorded: outcome=executed profit=491.8795469825194
+15:44:47 run 169: pacing wait 43s (executor cooldown)
+15:45:46 run 169: whale GTB 100000 into pool B tx 0x298638442307.. block 63498355
+15:45:48 run 169: signalled nonce 169 spread 1323bps react 0x17771b6adcf1..
+15:45:57 run 169: EXECUTED profit 3008.1819 GTB latency 2s
+15:46:08 run 169 recorded: outcome=executed profit=3008.181921259302
+15:46:09 run 170: RSC lREACT low (0.5758); attempting top-up
+15:46:14 run 170: topped RSC with 0.0255 lREACT from wallet
+15:46:21 run 170: pacing wait 21s (executor cooldown)
+15:47:05 run 170: whale GTB 100000 into pool A tx 0xb0d079953197.. block 63498725
+15:47:08 run 170: signalled nonce 170 spread 610bps react 0xede470782e5d..
+15:47:36 run 170: EXECUTED profit 531.2091 GTB latency 2s
+15:47:45 run 170 recorded: outcome=executed profit=531.209079109922
+15:47:46 run 171: RSC lREACT low (0.5565); attempting top-up
+15:47:48 run 171: RSC top-up unavailable (RSC 0.5565 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+15:47:50 run 171: pacing wait 6s (executor cooldown)
+15:48:07 run 171: whale GTB 100000 into pool B tx 0x9f53b87b02ea.. block 63499082
+15:48:09 run 171: signalled nonce 171 spread 1262bps react 0xe4189b19cebd..
+15:48:17 run 171: EXECUTED profit 2941.8209 GTB latency 1s
+15:48:26 run 171 recorded: outcome=executed profit=2941.8209059003484
+15:48:27 run 172: RSC lREACT low (0.5116); attempting top-up
+15:48:29 run 172: RSC top-up unavailable (RSC 0.5116 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+15:48:31 run 172: pacing wait 36s (executor cooldown)
+15:49:43 run 172: whale GTB 100000 into pool A tx 0x9ca981b1208e.. block 63499446
+15:49:46 run 172: signalled nonce 172 spread 613bps react 0x5fc07b81d5ce..
+15:50:00 run 172: EXECUTED profit 568.3009 GTB latency 1s
+15:50:05 run 172 recorded: outcome=executed profit=568.300859900129
+15:50:06 run 173: RSC lREACT low (0.4668); attempting top-up
+15:50:08 run 173: RSC top-up unavailable (RSC 0.4668 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+15:50:09 run 173: pacing wait 12s (executor cooldown)
+15:50:36 run 173: whale GTB 100000 into pool B tx 0xb98ecf1639e8.. block 63499804
+15:50:39 run 173: signalled nonce 173 spread 1207bps react 0x7d46f0e6db6e..
+15:50:52 run 173: EXECUTED profit 2878.2447 GTB latency 1s
+15:50:57 run 173 recorded: outcome=executed profit=2878.24467795198
+15:50:58 run 174: RSC lREACT low (0.4219); attempting top-up
+15:51:00 run 174: RSC top-up unavailable (RSC 0.4219 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+15:51:01 run 174: pacing wait 31s (executor cooldown)
+15:51:53 run 174: whale GTB 100000 into pool A tx 0xfb9d6b4ccc07.. block 63500165
+15:51:56 run 174: signalled nonce 174 spread 615bps react 0x356d531396db..
+15:52:12 run 174: EXECUTED profit 603.2646 GTB latency 2s
+15:52:18 run 174 recorded: outcome=executed profit=603.2646280302702
+15:52:19 run 175: RSC lREACT low (0.3771); attempting top-up
+15:52:21 run 175: RSC top-up unavailable (RSC 0.3771 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+15:52:21 run 175: pacing wait 23s (executor cooldown)
+15:53:13 run 175: whale GTB 100000 into pool B tx 0x0d2c2291bc1d.. block 63500535
+15:53:16 run 175: signalled nonce 175 spread 1159bps react 0x99e594f0d2b6..
+15:53:28 run 175: EXECUTED profit 2817.2545 GTB latency 2s
+15:53:41 run 175 recorded: outcome=executed profit=2817.2544754405612
+15:53:42 run 176: RSC lREACT low (0.3323); attempting top-up
+15:53:44 run 176: RSC top-up unavailable (RSC 0.3323 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+15:53:50 run 176: pacing wait 8s (executor cooldown)
+15:54:12 run 176: whale GTB 100000 into pool A tx 0x781d08bb7050.. block 63500896
+15:54:15 run 176: signalled nonce 176 spread 616bps react 0x1dd927aae555..
+15:54:27 run 176: EXECUTED profit 636.2027 GTB latency 1s
+15:54:30 run 176 recorded: outcome=executed profit=636.2026694152678
+15:54:31 run 177: RSC lREACT low (0.2875); attempting top-up
+15:54:33 run 177: RSC top-up unavailable (RSC 0.2875 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+15:54:33 run 177: pacing wait 37s (executor cooldown)
+15:55:31 run 177: whale GTB 100000 into pool B tx 0x2d839f246fb7.. block 63501265
+15:55:34 run 177: signalled nonce 177 spread 1114bps react 0x460e0eebeaaa..
+15:55:49 run 177: EXECUTED profit 2758.6757 GTB latency 2s
+15:55:53 run 177 recorded: outcome=executed profit=2758.6756645588835
+15:55:53 run 178: RSC lREACT low (0.2426); attempting top-up
+15:55:55 run 178: RSC top-up unavailable (RSC 0.2426 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+15:55:56 run 178: pacing wait 29s (executor cooldown)
+15:56:36 run 178: whale GTB 100000 into pool A tx 0x126146f16b9e.. block 63501633
+15:56:39 run 178: signalled nonce 178 spread 617bps react 0xdc7aa86da666..
+15:56:49 run 178: EXECUTED profit 667.2107 GTB latency 1s
+15:56:58 run 178 recorded: outcome=executed profit=667.2106517332584
+15:56:59 run 179: RSC lREACT low (0.1978); attempting top-up
+15:57:00 run 179: RSC top-up unavailable (RSC 0.1978 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+15:57:01 run 179: pacing wait 36s (executor cooldown)
+15:58:00 run 179: whale GTB 100000 into pool B tx 0x3cd6005a936d.. block 63502032
+15:58:02 run 179: signalled nonce 179 spread 1075bps react 0xb10c8bba2d7d..
+15:58:11 run 179: EXECUTED profit 2702.3533 GTB latency 1s
+15:58:15 run 179 recorded: outcome=executed profit=2702.3533058988664
+15:58:16 run 180: RSC lREACT low (0.1530); attempting top-up
+15:58:18 run 180: RSC top-up unavailable (RSC 0.1530 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+15:58:20 run 180: pacing wait 37s (executor cooldown)
+15:59:06 run 180: whale GTB 100000 into pool A tx 0x9a8963e5ff53.. block 63502391
+15:59:09 run 180: signalled nonce 180 spread 617bps react 0xb362406735c4..
+15:59:24 run 180: EXECUTED profit 696.3783 GTB latency 1s
+15:59:27 run 180 recorded: outcome=executed profit=696.3783160867182
+15:59:29 run 181: RSC lREACT low (0.1081); attempting top-up
+15:59:31 run 181: RSC top-up unavailable (RSC 0.1081 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+15:59:31 run 181: pacing wait 38s (executor cooldown)
+16:00:39 run 181: whale GTB 100000 into pool B tx 0x213cad55fdfb.. block 63502803
+16:00:41 run 181: signalled nonce 181 spread 1038bps react 0x855743ba2e9a..
+16:01:00 run 181: EXECUTED profit 2648.1487 GTB latency 1s
+16:01:04 run 181 recorded: outcome=executed profit=2648.1487454194835
+16:01:04 run 182: RSC lREACT low (0.0633); attempting top-up
+16:01:06 run 182: RSC top-up unavailable (RSC 0.0633 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:01:07 run 182: pacing wait 24s (executor cooldown)
+16:01:41 run 182: whale GTB 100000 into pool A tx 0xc6ae00105001.. block 63503156
+16:01:44 run 182: signalled nonce 182 spread 617bps react 0x4e12c03ac1ca..
+16:02:26 run 182: EXECUTED profit 723.7901 GTB latency 1s
+16:02:30 run 182 recorded: outcome=executed profit=723.7900570695759
+16:02:31 run 183: RSC lREACT low (0.0185); attempting top-up
+16:02:32 run 183: RSC top-up unavailable (RSC 0.0185 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:02:33 run 183: pacing wait 10s (executor cooldown)
+16:03:17 run 183: whale GTB 100000 into pool B tx 0x3a960451c5f0.. block 63503522
+16:03:19 run 183: signalled nonce 183 spread 1005bps react 0x2aec846fbb2c..
+16:03:33 run 183: EXECUTED profit 2595.9370 GTB latency 2s
+16:03:37 run 183 recorded: outcome=executed profit=2595.9369579117
+16:03:38 run 184: RSC lREACT low (0.0009); attempting top-up
+16:03:40 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:03:41 run 184: pacing wait 16s (executor cooldown)
+16:04:13 run 184: whale GTB 100000 into pool A tx 0xf678e4f0898a.. block 63503915
+16:04:58 run 184: NO SIGNAL
+16:05:00 run 184: fuel stall (debt 0.013647 lREACT, RSC 0.000928177970703216 lREACT) - pausing for fuel
+16:05:02 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:05:24 run 184: RSC lREACT low (0.0009); attempting top-up
+16:05:25 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:08:27 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:08:33 run 184: RSC lREACT low (0.0009); attempting top-up
+16:08:34 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:11:36 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:11:39 run 184: RSC lREACT low (0.0009); attempting top-up
+16:11:40 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:14:43 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:14:46 run 184: RSC lREACT low (0.0009); attempting top-up
+16:14:47 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:17:49 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:17:52 run 184: RSC lREACT low (0.0009); attempting top-up
+16:17:53 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:20:55 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:20:59 run 184: RSC lREACT low (0.0009); attempting top-up
+16:21:01 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:24:02 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:24:05 run 184: RSC lREACT low (0.0009); attempting top-up
+16:24:07 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:27:09 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:27:12 run 184: RSC lREACT low (0.0009); attempting top-up
+16:27:14 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:30:16 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:30:21 run 184: RSC lREACT low (0.0009); attempting top-up
+16:30:23 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:33:26 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:33:29 run 184: RSC lREACT low (0.0009); attempting top-up
+16:33:31 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:36:33 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:36:36 run 184: RSC lREACT low (0.0009); attempting top-up
+16:36:38 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:39:39 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:39:43 run 184: RSC lREACT low (0.0009); attempting top-up
+16:39:45 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:42:47 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:42:50 run 184: RSC lREACT low (0.0009); attempting top-up
+16:42:51 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:45:53 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:46:01 run 184: RSC lREACT low (0.0009); attempting top-up
+16:46:03 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:49:05 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:49:13 run 184: RSC lREACT low (0.0009); attempting top-up
+16:49:15 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:52:17 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:52:21 run 184: RSC lREACT low (0.0009); attempting top-up
+16:52:22 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:55:24 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:55:29 run 184: RSC lREACT low (0.0009); attempting top-up
+16:55:30 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
+16:58:32 run 184: FUEL WAIT (RSC 0.0009 lREACT, debt 0.013647)
+16:58:35 run 184: RSC lREACT low (0.0009); attempting top-up
+16:58:37 run 184: RSC top-up unavailable (RSC 0.0009 lREACT, wallet 0.0029 lREACT) - continuing; stall will pause-and-retry
