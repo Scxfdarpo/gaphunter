@@ -42,11 +42,20 @@ Built for the **Reactive Omni Buildathon — Every Second Counts** track.
   problem in DeFi; closing them realigns prices for everyone. The pattern
   generalises to any V2-style pair on any supported origin chain — the
   second chain was added by redeploying the same contracts, unchanged.
-- **Craft** — Foundry repo, **17 tests** (the full whale → signal →
-  callback → profit loop against real constant-product pools, plus 12
-  guard tests for the threshold / cooldown / replay / profit gates),
-  both Base-leg contracts **Sourcify-verified with an exact match**, a
-  live dashboard reading the chain directly, reproducible deployment
+- **Craft** — Foundry repo, **66 tests, all passing**: the full
+  whale → signal → callback → profit loop against real constant-product
+  pools, 12 guard tests for the threshold / cooldown / replay / profit
+  gates, **48 fuzz/property tests at 256 runs each** (including a
+  pricing-model equivalence proof: the executor executes if and only if
+  the constant-product model says the round trip is profitable, and
+  books exactly the modelled profit), and a **12-property invariant
+  campaign (128,000 stateful handler calls per full run)** covering
+  nonce discipline and the executor's balance identity. **Slither
+  static analysis** is published with honest dispositions (0 High,
+  3 Medium, 10 Low, 6 Informational — see
+  [`SECURITY.md`](SECURITY.md)), both Base-leg contracts are
+  **Sourcify-verified with an exact match**, and there is a live
+  dashboard reading the chain directly, reproducible deployment
   scripts, and this README.
 
 ## Design notes
@@ -97,6 +106,22 @@ request, delivers it through a stand-in proxy, and asserts the executor
 closed the gap at a profit. The guard suite pins down the RSC's
 threshold, cooldown, sizing and minimum-profit gates and the executor's
 live-reprice revert, replay protection and owner-only paths.
+
+On top of those 17 scenario tests, `test/GapHunterFuzz.t.sol` (32) and
+`test/GapHunterProperties.t.sol` (16) state the system's safety claims
+as fuzzed properties at 256 runs each — signal gates at randomized
+thresholds and parameters, nonce monotonicity, both cooldowns at their
+boundaries, guard modifiers under fuzzed callers, event contents
+recomputed independently from live reserves, and the executor's
+execute-if-and-only-if-profitable equivalence with the pricing model.
+`test/GapHunterInvariant.t.sol` adds a stateful campaign: a handler
+drives whales, Sync deliveries, noise logs, time travel, retunes and
+callback deliveries in random order while 12 invariants (nonce
+discipline, balance identity, stored-reserve freshness, callback
+routing) are checked after every sequence — 256 runs × 500 calls =
+128,000 handler calls in a default run. Static analysis (Slither) and
+the disposition of every finding are in [`SECURITY.md`](SECURITY.md),
+with raw reports under [`analysis/`](analysis/).
 
 ## Deploy
 

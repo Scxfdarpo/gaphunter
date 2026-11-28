@@ -1,0 +1,84 @@
+
+Detector: divide-before-multiply
+GapHunterReactive.react(IReactive.LogRecord) (src/GapHunterReactive.sol#107-183) performs a multiplication on the result of a division:
+	- amountIn = (buyReserve1 * tradeFractionBps) / 10_000 (src/GapHunterReactive.sol#162)
+	- estimatedProfit * 10_000 < amountIn * minProfitBps (src/GapHunterReactive.sol#168)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#divide-before-multiply
+
+Detector: unused-return
+GapHunterExecutor.executeArb(address,uint256,address,address,uint256) (src/GapHunterExecutor.sol#78-116) ignores return value by (bR0,bR1,None) = buyPair.getReserves() (src/GapHunterExecutor.sol#94)
+GapHunterExecutor.executeArb(address,uint256,address,address,uint256) (src/GapHunterExecutor.sol#78-116) ignores return value by (sR0,sR1,None) = sellPair.getReserves() (src/GapHunterExecutor.sol#95)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-return
+
+Detector: missing-zero-check
+GapHunterExecutor.withdrawNative(address,uint256).to_ (src/GapHunterExecutor.sol#126) lacks a zero-check on :
+		- (ok,None) = to_.call{value: amount_}() (src/GapHunterExecutor.sol#128)
+GapHunterReactive.constructor(uint256,address,address).poolA_ (src/GapHunterReactive.sol#73) lacks a zero-check on :
+		- poolA = poolA_ (src/GapHunterReactive.sol#75)
+GapHunterReactive.constructor(uint256,address,address).poolB_ (src/GapHunterReactive.sol#73) lacks a zero-check on :
+		- poolB = poolB_ (src/GapHunterReactive.sol#76)
+GapHunterReactive.setExecutor(address).executor_ (src/GapHunterReactive.sol#83) lacks a zero-check on :
+		- executor = executor_ (src/GapHunterReactive.sol#85)
+GapHunterReactive.withdraw(address,uint256).to_ (src/GapHunterReactive.sol#186) lacks a zero-check on :
+		- (ok,None) = to_.call{value: amount_}() (src/GapHunterReactive.sol#188)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+
+Detector: reentrancy-benign
+Reentrancy in GapHunterExecutor.executeArb(address,uint256,address,address,uint256) (src/GapHunterExecutor.sol#78-116):
+	External calls:
+	- require(bool,string)(IERC20Minimal(token1).transfer(poolBuy_,amountIn_),fund buy failed) (src/GapHunterExecutor.sol#105)
+	- buyPair.swap(bought,0,address(this),new bytes(0)) (src/GapHunterExecutor.sol#106)
+	- require(bool,string)(IERC20Minimal(token0).transfer(poolSell_,bought),fund sell failed) (src/GapHunterExecutor.sol#109)
+	- sellPair.swap(0,proceeds,address(this),new bytes(0)) (src/GapHunterExecutor.sol#110)
+	State variables written after the call(s):
+	- arbsExecuted ++ (src/GapHunterExecutor.sol#114)
+	- totalProfit += profit (src/GapHunterExecutor.sol#113)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-3
+
+Detector: reentrancy-events
+Reentrancy in GapHunterExecutor.executeArb(address,uint256,address,address,uint256) (src/GapHunterExecutor.sol#78-116):
+	External calls:
+	- require(bool,string)(IERC20Minimal(token1).transfer(poolBuy_,amountIn_),fund buy failed) (src/GapHunterExecutor.sol#105)
+	- buyPair.swap(bought,0,address(this),new bytes(0)) (src/GapHunterExecutor.sol#106)
+	- require(bool,string)(IERC20Minimal(token0).transfer(poolSell_,bought),fund sell failed) (src/GapHunterExecutor.sol#109)
+	- sellPair.swap(0,proceeds,address(this),new bytes(0)) (src/GapHunterExecutor.sol#110)
+	Event emitted after the call(s):
+	- ArbExecuted(arbNonce_,poolBuy_,poolSell_,amountIn_,proceeds,profit) (src/GapHunterExecutor.sol#115)
+Reentrancy in GapHunterReactive.react(IReactive.LogRecord) (src/GapHunterReactive.sol#107-183):
+	External calls:
+	- SYSTEM.requestCallbackV_1_0(ISystemContract.CallbackConfiguration_V_1_0({chainId:originChainId,recipient:executor,gasLimit:CALLBACK_GAS_LIMIT,payload:payload})) (src/GapHunterReactive.sol#177-181)
+	Event emitted after the call(s):
+	- ArbSignalled(arbNonce,poolBuy,poolSell,amountIn,spreadBps,estimatedProfit) (src/GapHunterReactive.sol#182)
+Reentrancy in GapHunterExecutor.rescue(address,address,uint256) (src/GapHunterExecutor.sol#119-123):
+	External calls:
+	- require(bool,string)(IERC20Minimal(token_).transfer(to_,amount_),rescue failed) (src/GapHunterExecutor.sol#121)
+	Event emitted after the call(s):
+	- Rescued(token_,to_,amount_) (src/GapHunterExecutor.sol#122)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+
+Detector: timestamp
+GapHunterExecutor.executeArb(address,uint256,address,address,uint256) (src/GapHunterExecutor.sol#78-116) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp >= lastExecAt + cooldownSeconds,cooldown) (src/GapHunterExecutor.sol#84)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+
+Detector: low-level-calls
+Low level call in GapHunterExecutor.withdrawNative(address,uint256) (src/GapHunterExecutor.sol#126-130):
+	- (ok,None) = to_.call{value: amount_}() (src/GapHunterExecutor.sol#128)
+Low level call in GapHunterReactive.withdraw(address,uint256) (src/GapHunterReactive.sol#186-190):
+	- (ok,None) = to_.call{value: amount_}() (src/GapHunterReactive.sol#188)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+
+Detector: naming-convention
+Variable PingPong._lastTxHash (src/PingPong.sol#22) is not in mixedCase
+Variable PingPong._lastReactBlockNumber (src/PingPong.sol#25) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+
+Detector: unindexed-event-address
+Event GapHunterExecutor.Rescued(address,address,uint256) (src/GapHunterExecutor.sol#52) has address parameters but no indexed parameters
+Event GapHunterReactive.ExecutorSet(address) (src/GapHunterReactive.sol#70) has address parameters but no indexed parameters
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unindexed-event-address-parameters
+. analyzed (21 contracts with 102 detectors), 19 result(s) found
+'forge clean' running (wd: /home/hatch/workspace/dorahacks/reactive-omni/gaphunter)
+'forge config --json' running
+'forge build --build-info --deny never --skip ./test/** ./script/** --force' running (wd: /home/hatch/workspace/dorahacks/reactive-omni/gaphunter)

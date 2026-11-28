@@ -1,0 +1,129 @@
+Compiling 4 files with Solc 0.8.39
+Solc 0.8.39 finished in 21.68s
+Compiler run successful!
+
+Ran 5 tests for test/GapHunter.t.sol:GapHunterTest
+[PASS] test_executor_rejects_wrong_sender() (gas: 37548)
+[PASS] test_full_loop_arbitrage() (gas: 1028694)
+[PASS] test_no_signal_without_gap() (gas: 228009)
+[PASS] test_react_rejects_non_system_caller() (gas: 48697)
+[PASS] test_subscriptions_registered() (gas: 5749)
+Suite result: ok. 5 passed; 0 failed; 0 skipped; finished in 33.59ms (10.56ms CPU time)
+
+Ran 16 tests for test/GapHunterProperties.t.sol:GapHunterPropertiesTest
+[PASS] testFuzz_equal_extreme_reserves_no_signal(uint112) (runs: 256, μ: 210444, ~: 210339)
+[PASS] testFuzz_execution_event_matches_balances(uint256) (runs: 256, μ: 1009096, ~: 1009113)
+[PASS] testFuzz_execution_narrows_the_spread(uint256) (runs: 256, μ: 991669, ~: 991686)
+[PASS] testFuzz_executor_last_exec_at(uint256) (runs: 256, μ: 403201, ~: 403225)
+[PASS] testFuzz_executor_rescue_moves_exact_amount(address,uint256) (runs: 256, μ: 115490, ~: 116351)
+[PASS] testFuzz_executor_withdraw_native(address,uint256) (runs: 256, μ: 64315, ~: 66845)
+[PASS] testFuzz_executor_zero_cooldown_same_second(uint256) (runs: 256, μ: 547151, ~: 547175)
+[PASS] testFuzz_full_loop_mirror_profits(uint256) (runs: 256, μ: 1003173, ~: 1003191)
+[PASS] testFuzz_full_loop_profits(uint256) (runs: 256, μ: 1019083, ~: 1019100)
+[PASS] testFuzz_repeated_cycles(uint256) (runs: 256, μ: 2111482, ~: 2161447)
+[PASS] testFuzz_retune_fraction_applies_to_next_signal(uint256,uint256) (runs: 256, μ: 1019325, ~: 1019472)
+[PASS] testFuzz_signal_callback_routing(uint256) (runs: 256, μ: 702068, ~: 702085)
+[PASS] testFuzz_signal_event_matches_recomputation(uint256) (runs: 256, μ: 704573, ~: 704590)
+[PASS] testFuzz_skewed_extreme_reserves_still_decide(uint112) (runs: 256, μ: 562506, ~: 562512)
+[PASS] testFuzz_zero_cooldown_signals_back_to_back(uint256) (runs: 256, μ: 902924, ~: 902946)
+[PASS] testFuzz_zero_gates_signal_any_profitable_gap(uint256) (runs: 256, μ: 719782, ~: 719799)
+Suite result: ok. 16 passed; 0 failed; 0 skipped; finished in 12.91s (18.95s CPU time)
+
+Ran 32 tests for test/GapHunterFuzz.t.sol:GapHunterFuzzTest
+[PASS] testFuzz_cooldown_lapses_and_nonce_increments(uint256) (runs: 256, μ: 885387, ~: 885412)
+[PASS] testFuzz_cooldown_suppresses_within_window(uint256) (runs: 256, μ: 760265, ~: 760292)
+[PASS] testFuzz_executor_cooldown_allows_after_window(uint256,uint256) (runs: 256, μ: 600122, ~: 600270)
+[PASS] testFuzz_executor_cooldown_blocks_within_window(uint256,uint256) (runs: 256, μ: 485535, ~: 485611)
+[PASS] testFuzz_executor_matches_pricing_model(uint256,uint256) (runs: 256, μ: 433004, ~: 456611)
+[PASS] testFuzz_executor_nonce_monotonic(uint256,uint256) (runs: 256, μ: 519511, ~: 562549)
+[PASS] testFuzz_executor_owner_guards(address) (runs: 256, μ: 81927, ~: 82111)
+[PASS] testFuzz_executor_profit_accumulates(uint256,uint256) (runs: 256, μ: 594907, ~: 594866)
+[PASS] testFuzz_executor_rejects_non_proxy_caller(address) (runs: 256, μ: 44167, ~: 44197)
+[PASS] testFuzz_executor_rejects_pair_mismatch(uint256) (runs: 256, μ: 1949070, ~: 1948981)
+[PASS] testFuzz_executor_rejects_wrong_callback_sender(address) (runs: 256, μ: 44243, ~: 44321)
+[PASS] testFuzz_executor_reverts_at_equal_prices(uint256) (runs: 256, μ: 111230, ~: 111143)
+[PASS] testFuzz_executor_reverts_without_inventory(uint256) (runs: 256, μ: 293810, ~: 293814)
+[PASS] testFuzz_no_callback_without_executor(uint256) (runs: 256, μ: 1434563, ~: 1434580)
+[PASS] testFuzz_no_signal_below_threshold(uint256) (runs: 256, μ: 419545, ~: 419577)
+[PASS] testFuzz_no_signal_below_threshold_mirror(uint256) (runs: 256, μ: 411708, ~: 411740)
+[PASS] testFuzz_no_signal_until_both_pools_seen(uint256) (runs: 256, μ: 690718, ~: 690735)
+[PASS] testFuzz_no_signal_when_min_profit_above_estimate(uint256) (runs: 256, μ: 459822, ~: 459863)
+[PASS] testFuzz_no_signal_when_threshold_above_spread(uint256) (runs: 256, μ: 454978, ~: 455015)
+[PASS] testFuzz_prices_seen_counts_exactly(uint256) (runs: 256, μ: 893550, ~: 807380)
+[PASS] testFuzz_react_ignores_non_sync_topic(uint256) (runs: 256, μ: 55415, ~: 55304)
+[PASS] testFuzz_react_ignores_unwatched_pool(address,uint112,uint112) (runs: 256, μ: 55697, ~: 55758)
+[PASS] testFuzz_react_rejects_non_system_caller(address) (runs: 256, μ: 56753, ~: 56783)
+[PASS] testFuzz_react_stores_reserves_verbatim(uint112,uint112) (runs: 256, μ: 130663, ~: 131213)
+[PASS] testFuzz_reactive_owner_guards(address) (runs: 256, μ: 79778, ~: 79901)
+[PASS] testFuzz_reactive_withdraw(address,uint256) (runs: 256, μ: 65198, ~: 67724)
+[PASS] testFuzz_setCooldown_roundtrip(uint256) (runs: 256, μ: 53470, ~: 53581)
+[PASS] testFuzz_setParams_roundtrip(uint256,uint256,uint256,uint256) (runs: 256, μ: 68736, ~: 69060)
+[PASS] testFuzz_signal_direction(uint256,bool) (runs: 256, μ: 751636, ~: 751656)
+[PASS] testFuzz_signal_size_follows_fraction(uint256) (runs: 256, μ: 790781, ~: 790829)
+[PASS] testFuzz_signal_when_min_profit_below_estimate(uint256) (runs: 256, μ: 725085, ~: 725223)
+[PASS] testFuzz_signal_when_threshold_below_spread(uint256) (runs: 256, μ: 792094, ~: 792232)
+Suite result: ok. 32 passed; 0 failed; 0 skipped; finished in 12.95s (18.95s CPU time)
+
+Ran 12 tests for test/GapHunterGuards.t.sol:GapHunterGuardsTest
+[PASS] test_cooldown_blocks_second_signal() (gas: 960066)
+[PASS] test_executor_owner_only_guards() (gas: 129036)
+[PASS] test_executor_rejects_pair_mismatch() (gas: 1948532)
+[PASS] test_executor_rejects_replayed_nonce() (gas: 1036338)
+[PASS] test_executor_reverts_unprofitable_callback() (gas: 116270)
+[PASS] test_executor_timestamp_cooldown() (gas: 1211102)
+[PASS] test_min_profit_gate_rejects_marginal_gap() (gas: 853061)
+[PASS] test_no_signal_below_threshold() (gas: 426530)
+[PASS] test_react_ignores_unrelated_logs() (gas: 108119)
+[PASS] test_reactive_owner_only_guards() (gas: 142533)
+[PASS] test_signal_direction_flips() (gas: 1000993)
+[PASS] test_trade_size_follows_fraction() (gas: 796892)
+Suite result: ok. 12 passed; 0 failed; 0 skipped; finished in 12.95s (24.57ms CPU time)
+
+Ran 1 test for test/GapHunterInvariant.t.sol:GapHunterInvariantTest
+[PASS]
+GapHunterInvariantTest invariants:
+[PASS] invariant_callback_routing
+[PASS] invariant_executions_match_ghost
+[PASS] invariant_executor_holds_no_token0
+[PASS] invariant_executor_nonce_within_rsc_nonce
+[PASS] invariant_last_arb_block_matches_ghost
+[PASS] invariant_nonce_equals_signals
+[PASS] invariant_pools_stay_solvent
+[PASS] invariant_prices_seen_matches_ghost
+[PASS] invariant_profit_iff_executions
+[PASS] invariant_signals_bounded_by_feeds
+[PASS] invariant_stored_reserves_match_last_feed
+[PASS] invariant_token1_balance_identity
+ GapHunterInvariantTest invariants (runs: 256, calls: 128000, reverts: 0)
+
+╭------------------+-----------------+-------+---------+----------╮
+| Contract         | Selector        | Calls | Reverts | Discards |
++=================================================================+
+| GapHunterHandler | advanceBlocks   | 10588 | 0       | 0        |
+|------------------+-----------------+-------+---------+----------|
+| GapHunterHandler | advanceTime     | 10544 | 0       | 0        |
+|------------------+-----------------+-------+---------+----------|
+| GapHunterHandler | deliverCallback | 10682 | 0       | 0        |
+|------------------+-----------------+-------+---------+----------|
+| GapHunterHandler | feedA           | 10458 | 0       | 0        |
+|------------------+-----------------+-------+---------+----------|
+| GapHunterHandler | feedB           | 10668 | 0       | 0        |
+|------------------+-----------------+-------+---------+----------|
+| GapHunterHandler | feedNoise       | 10679 | 0       | 0        |
+|------------------+-----------------+-------+---------+----------|
+| GapHunterHandler | retune          | 10682 | 0       | 0        |
+|------------------+-----------------+-------+---------+----------|
+| GapHunterHandler | retuneCooldown  | 10623 | 0       | 0        |
+|------------------+-----------------+-------+---------+----------|
+| GapHunterHandler | whaleBuyA       | 10767 | 0       | 0        |
+|------------------+-----------------+-------+---------+----------|
+| GapHunterHandler | whaleBuyB       | 10834 | 0       | 0        |
+|------------------+-----------------+-------+---------+----------|
+| GapHunterHandler | whaleSellA      | 10687 | 0       | 0        |
+|------------------+-----------------+-------+---------+----------|
+| GapHunterHandler | whaleSellB      | 10788 | 0       | 0        |
+╰------------------+-----------------+-------+---------+----------╯
+
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 48.86s (48.83s CPU time)
+
+Ran 5 test suites in 48.87s (87.71s CPU time): 66 tests passed, 0 failed, 0 skipped (66 total tests)
